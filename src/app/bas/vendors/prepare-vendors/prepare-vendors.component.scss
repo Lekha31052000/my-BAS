@@ -1,0 +1,172 @@
+@import 'src/assets/styles/global.scss';
+
+.p-content {
+  padding-bottom: 0px !important;
+}
+
+.roles-container {
+  padding: 0 15px;
+}
+
+.vendor-txt {
+  color: $primary-clr-alpha;
+  font-size: 20px;
+
+  img {
+    width: 5%;
+  }
+}
+
+.create-role,
+.user-details {
+  width: 100%;
+  padding: 10px 20px 20px;
+  background-color: $white;
+}
+
+.user-details {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+}
+
+.create-role {
+  height: 90px;
+  border-radius: 5px;
+  box-shadow: -5px 5px 12px 0 rgba(0, 0, 0, 0.1);
+
+  div.form-group {
+    width: 28%;
+    max-width: 200px;
+    max-width: 400px;
+  }
+
+  div.form-group:not(:first-child) {
+    margin-left: 5%;
+    // width: 30%;
+    margin-bottom: 0px;
+  }
+
+  .form-group {
+    .mat-form-field {
+      display: block !important;
+
+      .mat-form-field-flex {
+        border-bottom: 1px solid;
+      }
+    }
+  }
+}
+
+.user-details {
+  .details {
+    width: 100%;
+  }
+
+  .fm-title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    color: $primary-clr-alpha;
+    margin-bottom: 10px;
+  }
+
+  .form-group {
+    // to remove the background color of the autofilled elements
+    @include remove-autofill-background();
+    margin-right: 5%;
+    max-width: 500px;
+
+    label {
+      font-size: 14px;
+      color: #b0bac9;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .form-title {
+      font-size: 20px !important;
+    }
+
+    .form-control {
+      height: calc(1.5em + 0.75rem + 4px) !important;
+      border: none;
+      background-color: rgba(203, 203, 203, 0.1);
+      box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.25);
+
+      &:disabled {
+        cursor: not-allowed;
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    .error-section {
+      min-height: 18px;
+    }
+  }
+}
+
+
+.form-title {
+  font-size: 20px;
+  margin-top: 40px;
+  font-weight: normal;
+}
+
+.form-actions {
+  padding: 35px 35px 0 0;
+  width: 100%;
+  text-align: right;
+
+  .submit-class {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  .submit-class {
+    @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 120px, 40px, 18px, 300, 20px);
+  }
+
+  .cancel-class {
+    @include create-buttons($white, $primary-clr-alpha, 6px, 12px, 120px, 40px, 18px, 300, 20px);
+    border: 1px solid $primary-clr-alpha;
+    margin-right: 10px;
+  }
+}
+
+.permissions-main-div {
+  max-height: 45vh;
+  overflow-y: auto;
+  padding: 1% 3% 2% 0.5%;
+  border: 1px solid #ccc;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.each-row-cls {
+  padding-bottom: 7px;
+}
+
+.permissions-indvi-col {
+  padding-left: 0px !important;
+}
+
+.module-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.set-name {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+@media (min-width:1025px) and (max-width:1440px) {}
+
+@media (min-width:769px) and (max-width:1024px) {}
+
+@media (max-width:768px) {
+  .create-role {
+    height: fit-content;
+  }
+
+}

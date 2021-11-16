@@ -1,0 +1,76 @@
+<div class="row no-gutter">
+  <div class="col-sm-5 col-md-5 layout-header">
+    <nav mat-tab-nav-bar class="tab-header" disableRipple>
+      <a
+        mat-tab-link
+        routerLink="onboarding"
+        routerLinkActive
+        #onboarding="routerLinkActive"
+        [ngClass]="onboarding.isActive ? 'tab-active' : ''"
+      >
+        <span class="tab-label">Onboarding </span>
+      </a>
+      <a
+        mat-tab-link
+        routerLink="separate"
+        routerLinkActive
+        #separate="routerLinkActive"
+        [ngClass]="separate.isActive ? 'tab-active' : ''"
+      >
+        <span class="tab-label">Separation</span>
+      </a>
+    </nav>
+  </div>
+  <div class="col-sm-7 col-md-7 form-action layout-action text-right">
+    <div class="custom-search">
+      <form [formGroup]="searchForm">
+        <div class="form-group">
+          <img
+            matSuffix
+            class="search-icon"
+            src="assets/images/search-icon.png"
+          />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="searchText"
+            [placeholder]="selectedTabLabel == 'separate' ? 'Search Associates' : 'Search Role'"
+            maxlength="60"
+            autocomplete="off"
+            (keyup)="onSearch($event)"
+          />
+        </div>
+      </form>
+    </div>
+
+    <span>
+      <ng-container>
+        <button
+          type="button"
+          name="createUser"
+          (click)="removeEmployee()"
+          class="create-action"
+        >
+          Move to Red Flag
+        </button>
+      </ng-container>
+    </span>
+    <input
+      hidden
+      type="file"
+      #csvFileInput
+      (change)="uploadExcel($event)"
+      style="display: none"
+      accept=".xlsx,.xls,.csv"
+    />
+    <button type="button" name="downloadUser" class="download-action">
+      Download CSV
+    </button>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="tab-body">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div class="login-container row no-gutter">
+  <div class="col-sm-6 left-section">
+    <div class="side-block"></div>
+    <div class="logo-section text-center col-xs-hidden">
+      <h4 class="logo-title">BAS</h4>
+      <img
+        src="assets/images/login-logo.svg"
+        class="img-responsive"
+        alt="BAS"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6 float-right login-wrapper">
+    <div class="login-section">
+      <div>
+        <!-- LoginForm -  starts -->
+        <form
+          class="login-form"
+          [formGroup]="loginForm"
+          (submit)="onLogin()"
+          autocomplete="off"
+        >
+          <div class="form-group mb-25">
+            <label class="form-title" for="signin">Sign In</label>
+            <p class="login-info">
+              Please enter your Email and Password to Sign-in.
+            </p>
+          </div>
+          <div class="form-group">
+            <!-- <mat-form-field class="block-input"> -->
+            <label for="email" class="required">Email Address</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="email"
+              placeholder="Enter Email Address"
+              autocomplete="off"
+              value=""
+              maxlength="60"
+              required
+              autofocus
+            />
+            <div class="error-section">
+              <ng-container
+                *ngIf="
+                  loginForm.controls.email.errors &&
+                  loginForm.controls.email.touched &&
+                  loginForm.controls.email.dirty
+                "
+              >
+                <p
+                  class="err-msg"
+                  [hidden]="!loginForm.get('email').hasError('required')"
+                >
+                  Email Address is required
+                </p>
+                <p
+                  class="err-msg"
+                  [hidden]="!loginForm.get('email').hasError('pattern')"
+                >
+                  Invalid Email Address
+                </p>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- <mat-form-field class="block-input"> -->
+            <label for="password" class="required">Password</label>
+            <input
+              class="form-control"
+              formControlName="password"
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Enter Password"
+              autocomplete="off"
+              value=""
+              maxlength="12"
+              required
+            />
+            <div class="error-section">
+              <ng-container
+                *ngIf="
+                  loginForm.controls.password.errors &&
+                  (loginForm.controls.password.touched ||
+                    loginForm.controls.password.dirty)
+                "
+              >
+                <p
+                  class="err-msg"
+                  [hidden]="!loginForm.get('password').hasError('required')"
+                >
+                  Password is required
+                </p>
+                <p
+                  class="err-msg"
+                  [hidden]="!loginForm.get('password').hasError('minlength')"
+                >
+                  Must include atleast 8 characters
+                </p>
+                <!-- <p class="err-msg" [hidden]="!loginForm.get('password').hasError('pattern')">
+                                    Must include atleast 8 characters - Atleast 1 Uppercase, 1 digit
+                                </p> -->
+              </ng-container>
+            </div>
+          </div>
+          <!-- <ngx-recaptcha2 formControlName="recaptcha">
+                    </ngx-recaptcha2> -->
+          <ngx-recaptcha2
+            #captchaElem
+            [siteKey]="siteKey"
+            [useGlobalDomain]="false"
+            formControlName="recaptcha"
+          >
+          </ngx-recaptcha2>
+          <div class="form-actions text-center">
+            <!-- <button type="submit" class="login-submit" name="login" [disabled]="loginForm.invalid"> -->
+            <button type="submit" class="login-submit" name="login">
+              Sign In
+            </button>
+          </div>
+
+          <div class="help-section">
+            <p>
+              <a class="sign-up" routerLink="../sign-up">New User?</a>
+              <!-- <a href="javascript:void(0)" class="sign-up">
+                                &nbsp;SIGN UP
+                            </a> -->
+            </p>
+            <p>
+              <a
+                href="javascript:void(0)"
+                class="forgot-password"
+                routerLink="../forgot-password"
+              >
+                Forgot Password ?</a
+              >
+            </p>
+          </div>
+        </form>
+        <!-- LoginForm -  ends -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+@import 'src/assets/styles/global.scss';
+
+.dashboard {
+  .dashboard-txt {
+    font-size: 20px;
+    color: #808080;
+  }
+
+  .newflex-container {
+    display: flex;
+    // justify-content: space-between;
+  }
+  .enddivcontainer{
+    margin-left: 10px;
+  }
+
+  .submitbtn{
+    margin-top: 36px;
+    margin-left: 30px;
+  }
+
+  .approval-view-btn {
+    font-size: 14px;
+    left: 16%;
+    margin-top: 4px;
+    color: #00a8e1;
+  }
+
+  .user-container {
+    padding: 20px 0px 10px;
+  }
+.reset-icon{
+  position: absolute;
+    left: 134px;
+    width: 14px;
+    bottom: 8px;
+}
+  .flag-content-div {
+    height: calc(100vh - (46vh + 80px + 80px));
+    
+  }
+
+  .flag-contents-height {
+    border-radius: 5px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    height: calc(100vh - (52vh + 80px + 80px));
+    //height: calc(100vh - (65vh + 80px + 80px));
+    //height: 122px;
+
+    .flag-box {
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      background-color: #ffffff;
+
+      img {
+        width: 60%;
+        margin-left: 6px;
+      }
+    }
+
+    .count-txt {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      //bottom: -8vh;
+      bottom: -44px;
+      //font-size: 40px;
+      font-size: 34px;
+      color: #808080;
+    }
+
+    .flag-txt-info {
+      //position: fixed;
+      //bottom: 52vh;
+      //padding-bottom: 10px;
+      //margin: 0px 4.5vw;
+      margin-top: 2.7vw;
+      font-size: 18px;
+      color: #808080;
+      font-weight: 500;
+      text-align: center;
+
+    }
+  }
+
+  .associates-enrollment-ht {
+    height: calc(100vh - (49vh - 80px + 80px + 40px));
+  }
+}
+@media screen and (min-width: 1400px) {
+  .flag-content-div {
+    height: calc(100vh - (59vh + 80px + 80px))!important;
+    
+  }
+  .flag-contents-height {
+    height: calc(100vh - (63vh + 80px + 80px))!important;
+    //height: calc(100vh - (65vh + 80px + 80px));
+    //height: 122px;
+  }
+}

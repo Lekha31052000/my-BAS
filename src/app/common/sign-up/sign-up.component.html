@@ -1,0 +1,102 @@
+<div class="login-container row no-gutter">
+    <div class="col-sm-6 left-section">
+        <div class="side-block">
+        </div>
+        <div class="logo-section text-center col-xs-hidden">
+            <h4 class="logo-title">BAS</h4>
+            <img src="assets/images/login-logo.svg" class="img-responsive" alt="BAS" />
+        </div>
+    </div>
+    <div class="col-sm-6 float-right login-wrapper">
+        <div class="login-section">
+            <div>
+                <form class="login-form" [formGroup]="signUpForm" (submit)="onSignUp()" autocomplete="off">
+                    <div class="form-group">
+                        <label class="form-title" for="signin">Sign Up</label>
+                        <!-- <p class="login-info">
+                                Please enter your email and Password to Sign-in.
+                            </p> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="required">First Name</label>
+                        <input class="form-control" type="text" formControlName="firstname"
+                            placeholder="Enter First Name" minlength="2" maxlength="30" autocomplete="off" required
+                            autofocus />
+                        <div class="error-section">
+                            <ng-container
+                                *ngIf="signUpForm.controls.firstname.errors && (signUpForm.controls.firstname.touched && signUpForm.controls.firstname.dirty)">
+                                <p class="err-msg" [hidden]="!signUpForm.get('firstname').hasError('required')">
+                                    First Name is required
+                                </p>
+                                <p class="err-msg" [hidden]="!signUpForm.get('firstname').hasError('minlength')">
+                                    Minimum 2 characters required
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="required">Last Name</label>
+                        <input class="form-control" type="text" formControlName="lastname" placeholder="Enter Last Name"
+                            minlength="1" maxlength="30" autocomplete="off" required />
+                        <div class="error-section">
+                            <ng-container
+                                *ngIf="signUpForm.controls.lastname.errors &&(signUpForm.controls.lastname.touched && signUpForm.controls.lastname.dirty)">
+                                <p class="err-msg" [hidden]="!signUpForm.get('lastname').hasError('required')">
+                                    Last Name is required
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="required">Email ID</label>
+                        <input class="form-control" type="text" formControlName="email"
+                            placeholder="Enter Email ID" autocomplete="off" value="" maxlength="100" required />
+                        <div class="error-section">
+                            <ng-container *ngIf="signUpForm.controls.email.errors &&(signUpForm.controls.email.touched &&
+                            signUpForm.controls.email.dirty)">
+                                <p class="err-msg" [hidden]="!signUpForm.get('email').hasError('required')">
+                                    Email ID is required</p>
+                                <p class="err-msg" [hidden]="!signUpForm.get('email').hasError('pattern')">
+                                    Invalid Email ID</p>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile" class="required">Mobile Number</label>
+                        <input class="form-control" formControlName="mobile" type="text" minlength="10" maxlength="10"
+                            placeholder="Enter Mobile Number" autocomplete="off" value=""
+                            [validateInput]="{'mobile-number': true}" required />
+                        <div class="error-section">
+                            <ng-container
+                                *ngIf="signUpForm.controls.mobile.errors &&(signUpForm.controls.mobile.touched && signUpForm.controls.mobile.dirty)">
+                                <p class="err-msg" [hidden]="!signUpForm.get('mobile').hasError('required')">
+                                    Mobile Number required
+                                </p>
+                                <p class="err-msg" [hidden]="!signUpForm.get('mobile').hasError('minlength')">
+                                    Mobile Number must be 10 digits
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-actions text-center">
+                        <button type="submit" class="login-submit" name="login" [disabled]="signUpForm.invalid">
+                            Request
+                        </button>
+                    </div>
+
+                    <div class="help-section">
+                        <p>
+                            <a class="sign-up" routerLink="../login">Existing User?</a>
+                            <!-- <a href="javascript:void(0)" class="sign-up" routerLink="../login">
+                                &nbsp;SIGN IN
+                            </a> -->
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mr-15 {
+  margin-right: 15px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mr-13 {
+  margin-left: 13%;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+.mb-25 {
+  margin-bottom: 25px !important;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-12 {
+  margin-top: 12px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.w-0 {
+  width: 0;
+}
+
+.p-0 {
+  padding: 0px;
+}
+
+.pl-0 {
+  padding-left: 0px;
+}
+
+.pl-15 {
+  padding-left: 15px !important;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.p-content {
+  padding: 20px 10px 20px 0px;
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+.display-inline {
+  display: inline !important;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// common btn styles
+.form-action {
+  .create-action {
+    // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+    @include create-buttons($primary-clr-alpha, $white, 0px, 0px, 150px, 42px, 18px, 300, 20px);
+    // @mixin no-transition($bg-color, $color)
+    @include no-transition($primary-clr-alpha, $white);
+  }
+
+  .download-action {
+    // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+    @include create-buttons($primary-clr-alpha, $white, 0px, 0px, 150px, 42px, 18px, 300, 20px);
+    @include no-transition($primary-clr-alpha, $white);
+  }
+}

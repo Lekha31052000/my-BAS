@@ -1,0 +1,46 @@
+<div class="row no-gutter">
+    <!-- <div class="col-sm-12"> -->
+    <div class="col-sm-5 col-md-5 layout-header">
+        <!-- <img matPrefix class="back-icon float-left" src="assets/images/back.svg"> -->
+        <nav mat-tab-nav-bar class="tab-header" disableRipple>
+            <a mat-tab-link (click)="onTabClick('Associates')" routerLink="/manage-associates/associates" routerLinkActive #associate="routerLinkActive" *ngIf="showResources.associates" [ngClass]="associate.isActive ? 'tab-active' : ''">
+                <span class="tab-label">Associates</span>
+            </a>
+            <a mat-tab-link routerLink="/manage-associates/red-flag" routerLinkActive #history="routerLinkActive" *ngIf="redflaghistory" [ngClass]="history.isActive ? 'tab-active' : ''" [ngClass]="hideData === false ? 'redFlag' : ''" routerLinkActive (click)="redFlaggedHistory('History')">
+                <span class="tab-label">Red Flag History</span>
+            </a>
+        </nav>
+    </div>
+    <div class="col-sm-7 col-md-7 form-action layout-action text-right" *ngIf="allBtns?.addAssociate">
+        <div class="custom-search">
+            <form [formGroup]="searchForm">
+                <div class="form-group">
+                    <img matSuffix class="search-icon" src="assets/images/search-icon.png" />
+                    <input class="form-control" type="text" formControlName="searchText" [placeholder]="selectedTabLabel == 'Associates' ? 'Search Associates' : 'Search'" maxlength="60" autocomplete="off" (keyup)="onSearch($event)" />
+                </div>
+            </form>
+        </div>
+        <!-- <div *ngIf="!deletableUsers.length" class="col-sm-9 "> -->
+        <span>
+            <ng-container *ngIf="hideData">
+                <button type="button" name="createUser" class="create-action" (click)="addAssociate()">
+                    Add / Check Associate
+                </button>
+            </ng-container>
+        </span>
+        <input hidden type="file" #csvFileInput (change)="uploadExcel($event)" style="display:none;" accept='.xlsx,.xls,.csv' />
+        <button type="button" name="downloadUser" *ngIf="hideData" (click)="csvFileInput.click()" class="download-action">
+            Upload
+        </button>
+        <button type="button" name="downloadUser" class="download-action" (click)="filterPopUp()">
+            Report
+        </button>
+        <!-- </div> -->
+    </div>
+    <!-- </div> -->
+    <div class="col-sm-12">
+        <div class="tab-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

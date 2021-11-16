@@ -1,0 +1,123 @@
+<div class="dashboard">
+    <form [formGroup]="filterForm" (submit)="onSubmit()">
+        <div class="row no-gutter">
+            <div class="col-md-1 col-lg-1 dashboard-txt">
+                Statistics
+            </div>
+            <div class="col-md-2 col-lg-2 mt-1">
+                <label id="la1" name="role">From</label>
+                <fieldset>
+                    <input type="date" id="date" name="Fromdate" formControlName="Fromdate" (change)="onPercentChange($event)" required useValueAsDate />
+                    <a (click)="resetDateFilter('From')"><img class="reset-icon" src="assets/images/close@2x.png" /></a>
+                </fieldset>
+            </div>
+            <div class="col-md-2 col-lg-2 mt-1">
+                <label id="labe2" name="role">To</label>
+                <fieldset>
+                    <input type="date" id="date" class="toDate" name="Todate" formControlName="Todate" (change)="onPercentChangenew($event)" min="{{selectedfromDate}}" required useValueAsDate />
+                    <a (click)="resetDateFilter('To')"><img class="reset-icon" src="assets/images/close@2x.png" /></a>
+                </fieldset>
+            </div>
+            <div class="col-md-1 col-lg-1 mt-2 dashboard-txt" style="margin-left: 106px;">
+                Approvals
+            </div>
+            <div style="left: auto;margin-top: 12px;" *ngIf="role === 'superadmin'">
+                <select (change)="update($event.target.value)">
+                <option value="all" selected>Select Vendor</option>
+                <option *ngFor="let i of vendorCollections">{{i}}</option>
+            </select>
+            </div>
+            <div class="col-md-1 col-lg-1 mt-2 approval-view-btn txt-right cursor-pointer" (click)="approvalList()">
+                View All
+            </div>
+        </div>
+        <div class="row no-margin">
+            <div class="col-md-6 col-lg-6 p-0 flag-content-div">
+                <div class="row user-container no-margin">
+                    <div class="col-md-4 col-lg-4 pl-0">
+                        <div class="flag-contents-height">
+                            <div class="row no-margin">
+                                <div class="col-md-6 col-lg-6 mt-10">
+                                    <div class="flag-box">
+                                        <img src="assets/images/flag-green.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="count-txt">
+                                        {{flagCounts.green}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="flag-txt-info">
+                                        Green Flags
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 pl-0">
+                        <div class="flag-contents-height">
+                            <div class="row no-margin">
+                                <div class="col-md-6 col-lg-6 mt-10">
+                                    <div class="flag-box">
+                                        <img src="assets/images/flag-orange.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="count-txt">
+                                        {{flagCounts.orange}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="flag-txt-info">
+                                        Orange Flags
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 pl-0">
+                        <div class="flag-contents-height">
+                            <div class="row no-margin">
+                                <div class="col-md-6 col-lg-6 mt-10">
+                                    <div class="flag-box">
+                                        <img src="assets/images/flag-red.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="count-txt">
+                                        {{flagCounts.red}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-12 col-lg-12 p-0">
+                                    <div class="flag-txt-info">
+                                        Red Flags
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 p-0 flag-content-div">
+                <app-approvals></app-approvals>
+            </div>
+        </div>
+        <div class="row no-margin associates-enrollment-ht" *ngIf="graph">
+            <highcharts-chart class="associates-enrollment-ht" [Highcharts]="highcharts" [options]="associatesChart.chartOptions" style="width: 100%; display: block;">
+            </highcharts-chart>
+        </div>
+    </form>
+</div>

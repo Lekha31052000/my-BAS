@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="492.927" height="256.426" viewBox="0 0 492.927 256.426">
+    <defs>
+        <style>
+            .cls-1{fill:url(#linear-gradient)}.cls-2{filter:url(#sound-wave)}
+        </style>
+        <linearGradient id="linear-gradient" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#0093e9"/>
+            <stop offset="1" stop-color="#36c2cf"/>
+        </linearGradient>
+        <filter id="sound-wave" width="492.927" height="256.426" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g class="cls-2">
+        <path id="sound-wave-2" d="M474.927 90.441a173.022 173.022 0 0 0-76.622 3.079 153.712 153.712 0 0 0-32.3 12.6c-9.245 5.1-17.1 12.123-28.116 15.106-10.385 2.79-20.643.866-30.269-2.6-17.857-6.447-35.335-14.337-55.218-7.986-17.984 5.677-29.635 19.34-42.047 30.116-10.892 9.429-24.443 18.185-41.667 18.859-32.3 1.347-50.026-22.8-70.289-37.814-22.8-16.838-54.458-30.79-87.133-24.536-4.047.777-8.1 1.935-11.266 4.048V-78.75h474.927V90.441z" class="cls-1" data-name="sound-wave" transform="translate(9 84.75)"/>
+    </g>
+</svg>

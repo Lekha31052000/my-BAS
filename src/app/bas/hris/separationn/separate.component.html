@@ -1,0 +1,150 @@
+<mat-card class="example-card">
+  <!-- <mat-card-subtitle class="card">6</mat-card-subtitle>
+    <mat-card-subtitle class="cardd">
+      Associates need to Separate
+    </mat-card-subtitle> -->
+  <h1 class="example-card card">6</h1>
+  <p class="example-card cardd">Associates need to Separate</p>
+</mat-card>
+
+<div class="user-container">
+  <div class="display-user">
+    <div class="table-responsive">
+      <!-- <table class="table table-scroll"> -->
+      <table class="table table-scroll scroll-hidden">
+        <thead>
+          <tr>
+            <th class="text-center" width="5%">
+              <mat-checkbox
+                (click)="checkClick(allUserList)"
+                class="check"
+              ></mat-checkbox>
+            </th>
+
+            <th>SI.No</th>
+            <th style="padding-right: 5px">First Name</th>
+            <th>Last Name</th>
+            <th>Phone No</th>
+            <th>Site Code</th>
+            <th style="padding-right: 19px">City</th>
+            <th>Job Type</th>
+            <th>Re-Hire</th>
+            <th>Reason</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <ng-container>
+          <tbody class="user-list">
+            <tr
+              *ngFor="
+                let user of allUserList
+                  | paginate
+                    : {
+                        itemsPerPage: pageData.pageSize,
+                        totalItems: pageData.totalItems,
+                        currentPage: pageData.pageNumber
+                      };
+                let userIndex = index
+              "
+            >
+              <td width="5%" class="center">
+                <mat-checkbox
+                  class="example-margin"
+                  type="checkbox"
+                  [checked]="isSelected"
+                  (click)="checkValues(user)"
+                >
+                </mat-checkbox>
+              </td>
+              <!-- <td class="center" width="5%">
+                <mat-checkbox
+                  class="check"
+                  [checked]="isSelected"
+                  (click)="checkValues(user)"
+                ></mat-checkbox>
+              </td> -->
+              <td class="padding-sno">
+                {{
+                  pageData.pageSize *
+                    (pageData.pageNumber > 0 ? pageData.pageNumber - 1 : 0) +
+                    userIndex +
+                    1
+                }}
+              </td>
+              <td class="text-capitalize padding">{{ user.firstname }}</td>
+              <td class="text-capitalize padding">{{ user.lastname }}</td>
+              <td class="padding-phone">
+                {{ user?.mobile ? "+91 " + user.mobile : "-" }}
+              </td>
+              <td class="padding">BLRY</td>
+              <td class="padding-city">Bangalore</td>
+              <td class="padding">{{ user?.role ? user.role : "-" }}</td>
+              <td class="padding">No</td>
+              <td class="padding">Theft</td>
+              <td class="padding-icon">
+                <img
+                  class="icon-edit cursor-pointer flex-item"
+                  src="assets/images/delete.svg"
+                  alt="delete"
+                  (click)="removeEmployee()"
+                />
+              </td>
+              <!--<td>{{user.transaction ? (user.transaction) : '0'}}</td> -->
+              <!-- <td class="action text-center" *ngIf="permissions.update || permissions.delete">
+                        <mat-slide-toggle *ngIf="permissions.delete" class="flex-item"
+                            name="archive{{userIndex}}" [(ngModel)]="user.deleted"
+                            (change)="confirmArchive(user)" disableRipple>
+                        </mat-slide-toggle>
+                        
+                        <img *ngIf="permissions.update" class="icon-edit cursor-pointer "
+                            (click)="navigatetoEditPage(user._id)" src="assets/images/edit.svg" alt="edit" />
+                        <img *ngIf="permissions.delete" class="icon-edit cursor-pointer flex-item"
+                            (click)="confirmDeletion(user, false)" src="assets/images/delete.svg"
+                            alt="delete" />
+                    </td> -->
+            </tr>
+          </tbody>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- <div style="margin:20px;">
+    <table  cellspacing="0" cellpadding="2">
+      <tr>
+        <td>Employee Id</td>
+        <td>Name</td>
+        <td>Action</td>
+      </tr>
+      <tr *ngFor="let employee of employeeList">
+        <td>{{employee.employeeId}}</td>
+        <td>{{employee.Name}}</td>
+        <td><a style="cursor: pointer;text-decoration:underline;color:blue" (click)="removeEmployee(employee)">Remove</a></td>
+      </tr>
+      </table>
+    </div> -->
+<div *ngIf="allUserList.length > 0" class="pagination-section my-pagination">
+  <!-- <div class="display-ib mr-20">
+        <div class="form-group custom-page-size">
+            <mat-form-field>
+                <mat-select placeholder="Page Size" #pageSize=ngModel name="pageSize"
+                    [(ngModel)]="pageData.pageSize" (selectionChange)="setCurrentPageNumber(0)">
+                    <mat-option *ngFor="let page of pageData.allPageSizes" [value]="page">
+                        {{page}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="display-ib">
+        <strong>Total No. of Users: {{pageData.totalItems}}</strong>
+    </div> -->
+  <pagination-controls
+    class="page"
+    (pageChange)="setCurrentPageNumber($event)"
+    [nextLabel]="pageControl.nextLabel"
+    [previousLabel]="pageControl.previousLabel"
+    [responsive]="pageControl.responsive"
+    [autoHide]="pageControl.autoHide"
+  ></pagination-controls>
+</div>

@@ -1,0 +1,67 @@
+.example-card {
+  width: 270px;
+  border: none;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.card {
+  font-size: 45px;
+  padding-top: -20px;
+  width: 200px;
+  margin: 1px;
+  color: rgb(23, 208, 221);
+  // font-weight: bold;
+  border: none;
+}
+.cardd {
+  position: relative;
+  color: rgb(104, 98, 98);
+  padding-bottom: 5px;
+  font-size: large;
+}
+.padding {
+  //  padding-left: 24px;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.padding-icon {
+  padding-left: 24px;
+  padding-top: 15px;
+}
+.padding-sno {
+  padding-left: 24px;
+  padding-top: 15px;
+}
+.padding-city {
+  padding-top: 15px;
+  padding-left: 2px;
+}
+.pagination-section {
+  margin-top: 40px;
+  padding-top: 40px;
+}
+.padding-left {
+  padding-right: 5px;
+  padding-top: 5px;
+}
+.padding-phone {
+  padding-right: 15px;
+  padding-top: 15px;
+  margin-top: 3px;
+}
+.check {
+  text-align: center;
+  padding-top: 20px;
+}
+.example-margin {
+  margin-top: 4px;
+}
+.center {
+  text-align: center;
+  padding-top: 17px;
+}
+.mat-checkbox-inner-container-no-side-margin {
+  margin-top: 8px;
+}

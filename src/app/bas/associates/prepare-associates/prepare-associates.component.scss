@@ -1,0 +1,117 @@
+@import 'src/assets/styles/global.scss';
+
+.roles-container {
+    height: calc(100vh - 80px - 85px);
+    padding: 20px 20px 10px;
+}
+
+.form-section {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px 20px 20px;
+    position: relative;
+
+    .fm-title {
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        color: $primary-clr-alpha;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        // to remove the background color of the autofilled elements
+        @include remove-autofill-background();
+        margin-right: 20px;
+
+        label {
+            font-size: 14px;
+            color: #b0bac9;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .form-title {
+            font-size: 20px !important;
+        }
+
+        .form-control {
+            height: calc(1.5em + 0.75rem + 4px) !important;
+            border: none;
+            background-color: rgba(203, 203, 203, 0.1);
+            box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.25);
+            &:disabled{
+                cursor: not-allowed;
+                border: none;
+                box-shadow: none;
+            }
+            // color: #495057 !important;
+        }
+    }
+}
+
+.create-role,
+.show-permissions {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: $white;
+}
+
+.create-role {
+    height: 90px;
+    border-radius: 5px;
+    box-shadow: -5px 5px 12px 0 rgba(0, 0, 0, 0.1);
+
+    div.form-group:first-child {
+        width: 30%;
+        margin-right: 25px;
+        margin-bottom: 0px;
+    }
+
+    div.form-group:nth-of-type(even) {
+        width: 40%;
+    }
+}
+
+.form-title {
+    font-size: 20px;
+    margin-top: 40px;
+    font-weight: normal;
+}
+
+.form-actions {
+    padding: 20px 35px 0 0;
+    width: 100%;
+    text-align: right;
+
+    .submit-class {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    // @mixin create-buttons($bgClr, $clr, $ptb, $plr, $width, $height, $ft-size, $ft-weight, $rad)
+    .submit-class {
+        // @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 188px, 42px, 18px, 300, 5px);
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 120px, 40px, 18px, 300, 20px);
+    }
+
+    .cancel-class {
+        // @mixin create-buttons($bgClr, $clr, $ptb, $plr, $width, $height, $ft-size, $ft-weight, $rad)
+        // @include create-buttons(#edeced, $primary-clr-dark, 6px, 12px, 188px, 42px, 18px, 300, 5px);
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($white, $primary-clr-alpha, 6px, 12px, 120px, 40px, 18px, 300, 20px);
+        border: 1px solid $primary-clr-alpha;
+        margin-right: 10px;
+    }
+}
+
+.wordbreak {
+    word-break: break-word;
+}
+
+@media (min-width:1025px) and (max-width:1440px) {}
+
+@media (min-width:769px) and (max-width:1024px) {}

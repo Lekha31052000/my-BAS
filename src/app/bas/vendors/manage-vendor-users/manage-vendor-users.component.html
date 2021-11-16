@@ -1,0 +1,58 @@
+<div class="row no-gutter p-20">
+    <div class="col-sm-5 col-md-5 col-lg-5 layout-header">
+        <div class="vendor-txt">
+            <span><img class="cursor-pointer" (click)="goBacktoList()" src="../../../../assets/images/back.svg"
+                    alt=""></span> Vendors (Users)
+        </div>
+    </div>
+
+    <div class="user-container">
+        <div class="display-user">
+            <div class="table-responsive">
+                <table class="table table-scroll">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="5%">Sl. No</th>
+                            <th> First Name </th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Mobile Number</th>
+                            <th>Transaction</th>
+                        </tr>
+                    </thead>
+                    <ng-container>
+                        <tbody class="user-list" *ngIf="allUserList.length > 0; else noUser;">
+                            <tr *ngFor="let user of allUserList | paginate: {id: '1', itemsPerPage : pageData.pageSize, totalItems: pageData.totalItems, currentPage: pageData.pageNumber }; let userIndex = index;"
+                                [ngClass]="user.deleted ? 'is-archive' : ''">
+                                <td class="text-center" width="5%">
+                                    {{pageData.pageSize * (pageData.pageNumber > 0 ? pageData.pageNumber - 1 : 0) + userIndex + 1}}
+                                </td>
+                                <td class="text-capitalize cursor-pointer txt-decoration"
+                                    (click)="vendorAssociates(user.email)">
+                                    {{user.firstname}}</td>
+                                <td class="text-capitalize">{{user.lastname}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.mobile ? ('+91 '+user.mobile) : '0'}}</td>
+                                <td>{{user.transaction ? (user.transaction) : '0'}}</td>
+
+                            </tr>
+                        </tbody>
+                    </ng-container>
+                    <ng-template #noUser>
+                        <tbody class="no-data">
+                            <tr>
+                                <td colspan="8" class="text-center">No User Available</td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
+            <div *ngIf="allUserList.length > 0" class="pagination-section my-pagination">
+                <pagination-controls (pageChange)="setCurrentPageNumber($event)" id="1"
+                    [nextLabel]="pageControl.nextLabel" [previousLabel]="pageControl.previousLabel"
+                    [responsive]="pageControl.responsive" [autoHide]="pageControl.autoHide"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+</div>

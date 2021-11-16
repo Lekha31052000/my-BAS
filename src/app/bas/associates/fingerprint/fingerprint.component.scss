@@ -1,0 +1,249 @@
+@import 'src/assets/styles/global.scss';
+
+.add-associate-modal {
+    border-radius: 10px;
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.16);
+    background-color: $white;
+}
+
+.dialog-header {
+    width: 380px;
+    min-height: 130px;
+    display: block;
+    // @mixin  set-background-image($bg-color, $bg-url, $bg-position, $bg-repeat, $bg-size)
+    @include set-background-image($white, url('src/assets/images/sound-wave-bg.svg'), right 50% bottom 0%, no-repeat, 104%);
+
+    img {
+        cursor: pointer;
+        margin-top: -3px;
+    }
+}
+
+.dialog-body {
+    padding-bottom: 20px;
+    position: relative;
+
+    .enroll-status{
+        margin-top: 15%;
+        margin-bottom: 15%;
+    }
+    .shift-down .scan-info {
+        margin-top: 20% !important;
+    }
+
+    .shift-up .scan-info {
+        margin-top: 5% !important;
+    }
+
+
+    .btn-actions button:nth-of-type(even) {
+        margin-left: 10px;
+    }
+
+
+    .img-wrapper,
+    .scanned-img-wrapper {
+        margin-left: 38%;
+        margin-top: 8%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .img-wrapper {
+        // @mixin  create-centered-section($width, $border-radius, $padding-tb, $padding-lr, $border,$background, $left)
+        // @include create-centered-section(150px, 10px, 18px, 5px, none, none, 0);
+
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        background-image: linear-gradient(135deg, #519548, #88c425);
+
+        img {
+            width: 60%;
+            height: 60%;
+            margin-top: 25%;
+        }
+    }
+
+    .scanned-img-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .add-space {
+        // @mixin  create-centered-section($width, $border-radius, $padding-tb, $padding-lr, $border,$background, $left)
+        // @include create-centered-section(150px, 10px, 18px, 5px, none, none, 0);
+        margin-bottom: 14%;
+        margin-top: 25%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .add-info {
+        margin-top: 12px;
+        font-size: 20px;
+        color: #707070;
+    }
+
+    .scan-info {
+        color: $primary-clr-alpha;
+    }
+
+    .agent-info {
+        width: 86%;
+        margin-left: 7%;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #ffffff;
+        background-image: linear-gradient(99deg, #f54828, #f7803c);
+
+        .info-header,
+        .info-header- {
+            padding: 9px 12px 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            height: 40px;
+            
+
+            p {
+                color: $white;
+            }
+
+            img {
+                width: 23px;
+            }
+        }
+
+        .info-header-green {
+            background-image: linear-gradient(99deg, #519548, #519548);
+        }
+
+        .info-header-red {
+            background-image: linear-gradient(99deg, #ff0000, #ff0000);
+        }
+
+        .info-header-orange {
+            background-image: linear-gradient(99deg, #fdb71a, #fdb71a);
+        }
+
+        .info-body {
+            padding: 15px 20px 0px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+            table tbody tr td {
+                padding: 0px !important;
+                border: none !important;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            table tbody tr td:first-child {
+                color: #2d2d2d;
+                width: 45%;
+            }
+
+            table tbody tr td:last-child {
+                color: #707070;
+                width: 55%;
+            }
+
+        }
+    }
+
+    .form-section {
+        width: 100%;
+        max-width: 380px;
+        margin-bottom: 20px;
+
+        // margin-left: 5%;
+        .fm-title {
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            color: $primary-clr-alpha;
+            margin-bottom: 5px;
+            margin-left: 4%;
+            text-align: left;
+        }
+
+        .form-group {
+            width: 44%;
+            margin-left: 4%;
+            text-align: left;
+            margin-bottom: 0px !important;
+            margin-top: -15px !important;
+
+            label {
+                font-size: 10px;
+                margin-bottom: 0 !important;
+                color: #707070;
+            }
+
+            .form-control {
+                height: calc(2.4em + 0.75rem - 5px) !important;
+                max-width: 380px;
+                padding: 0 5px;
+                font-size: 12px !important;
+                color: #535353;
+
+                &:focus,
+                &:active {
+                    outline: none !important;
+                    box-shadow: none !important;
+                }
+            }
+
+            .error-section {
+                min-height: 15px;
+
+                .err-msg {
+                    font-size: 9px !important;
+                }
+            }
+        }
+
+    }
+
+    .btn-continue,
+    .add-assc {
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($white, $primary-clr-alpha, 6px, 12px, 95px, 39x, 15px, 300, 20px);
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        font-family: 'Amazon Ember Display Light';
+    }
+
+    .btn-continue {
+        background-color: $primary-clr-alpha !important;
+        color: $white;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    .slider-wrapper {
+        margin-top: 30px;
+        margin-bottom: 20px;
+
+        mat-slider {
+            height: 48px;
+            width: 78%;
+        }
+    }
+    .new-assc,
+    .success,
+    .failure {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .success {
+        color: #5a9d42;
+    }
+
+    .failure {
+        color: #f54a28;
+    }
+    .new-assc{
+        color: #ff9900;
+    }
+}

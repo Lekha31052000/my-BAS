@@ -1,0 +1,189 @@
+@import '../../../../assets/styles/global.scss';
+
+.filters {
+  .filter-header{
+    img{
+      width: 20px;
+    }
+  }
+  .report-generation-txt {
+    color: $primary-clr-alpha;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .close {
+    width: 30%;
+  }
+
+  label {
+    color: $primary-grey;
+  }
+
+  .calendar-group {
+    label {
+      margin-bottom: 0.7em;
+    }
+
+    .form-control {
+      padding: 0 5px;
+      font-size: 12px !important;
+      color: #535353;
+
+      &:focus,
+      &:active {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .create-action {
+    // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+    @include create-buttons($primary-clr-alpha, $white, 0px, 0px, 150px, 38px, 16px, 300, 20px);
+  }
+
+  .align-generate-btn {
+    position: absolute;
+    bottom: 27vh;
+    left: 44vw;
+  }
+
+  .fmp-dashboard {
+    position: relative;
+
+    .fmp-dashboard-text {
+      color: #808080;
+      font-size: 16px;
+      font-weight: 600;
+      padding-top: 10px;
+    }
+
+    .fmp-dashboard-date-range {
+      font-size: 12px;
+      color: #b3b3b3;
+      margin-bottom: 10px;
+
+      .main-div {
+        display: flex;
+        height: 35px;
+        border: solid 2px #ebebeb;
+        border-radius: 30px;
+        height: 35px;
+        width: max-content;
+
+        .text:hover {
+          color: #ef7f1a;
+        }
+
+        .fmp-dashboard-date-range-text {
+          padding: 10px 10px 0px 10px;
+          border-right: solid 2px #ebebeb;
+        }
+
+        .fmp-dashboard-date-range-second-text {
+          padding: 10px 10px 0px 10px;
+          border-right: solid 2px #ebebeb;
+        }
+
+        .fmp-dashboard-date-range-third-text {
+          padding: 10px 10px 0px 10px;
+        }
+
+        .active {
+          color: #ef7f1a;
+        }
+      }
+    }
+
+    .fmp-dashboard-date-picked {
+      position: relative;
+
+      .fmp-dasboard-date-picker {
+        width: 111%;
+        padding: 8px 10px 0px 10px;
+        height: 35px;
+        border-radius: 30px;
+        border: solid 2px #ebebeb;
+        color: #b3b3b3;
+        font-size: 12px;
+        // width: max-content;
+      }
+
+      img {
+        width: 8%;
+        margin-right: 10px;
+      }
+    }
+
+    .fmp-dashboard-content {
+      position: absolute;
+      right: 12vw;
+      z-index: 1;
+      top: 4vh;
+
+      .content-bg {
+        background-color: white;
+        line-height: 2;
+        width: calc(100vw - (90vw));
+        font-size: 14px;
+        text-align: center;
+        opacity: 0.9;
+        color: #cccccc;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+
+        .border-bottom-content {
+          border-bottom: 1px solid #cccccc;
+        }
+      }
+    }
+
+    .text-right-aligned {
+      text-align: -webkit-right;
+      text-align: -moz-right;
+      text-align: -o-right;
+      text-align: -ms-right;
+    }
+
+    .arrow-left {
+      img {
+        width: 28%;
+      }
+    }
+
+    .calendar-info {
+      font-size: 11px;
+      margin: 15px;
+      padding: 10px;
+      height: calc(100vh - (77vh));
+    }
+
+    .active-tab {
+      border-radius: 18px;
+      background-color: #00a8e1;
+      color: white;
+      height: max-content;
+    }
+  }
+}
+
+/* If screen size is more than 500px and less than 650px height, set table card height */
+@media screen and (min-height: 619px) and (max-height: 800px) {
+  .fmp-dashboard {
+    .calendar-info {
+      font-size: 10px;
+    }
+  }
+}
+
+@media screen and (min-height: 600px) and (max-height: 900px) {
+  .fmp-dashboard {
+    .fmp-dashboard-content {
+      right: 7vw !important;
+      .content-bg {
+        width: calc(100vw - (85vw)) !important;
+      }
+    }
+  }
+}

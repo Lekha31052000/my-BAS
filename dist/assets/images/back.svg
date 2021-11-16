@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52.268" height="52.268" viewBox="0 0 52.268 52.268">
+    <defs>
+        <style>
+            .cls-1{fill:#00a8e1}.cls-2{fill:#fff}.cls-3{filter:url(#Path_510)}
+        </style>
+        <filter id="Path_510" width="52.268" height="52.268" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g id="left-arrow" transform="translate(8.341 5.341)">
+        <g id="Group_774" data-name="Group 774">
+            <g class="cls-3" transform="translate(-8.34 -5.34)">
+                <path id="Path_510-2" d="M18.134 35.268A17.134 17.134 0 0 1 1 18.134 17.134 17.134 0 0 1 18.134 1a17.134 17.134 0 0 1 17.134 17.134 17.134 17.134 0 0 1-17.134 17.134z" class="cls-1" data-name="Path 510" transform="translate(8 5)"/>
+            </g>
+            <path id="Path_511" d="M17.793 35.586a17.793 17.793 0 1 1 17.793-17.793 17.813 17.813 0 0 1-17.793 17.793zm0-34.268a16.475 16.475 0 1 0 16.475 16.475A16.494 16.494 0 0 0 17.793 1.318z" class="cls-2" data-name="Path 511"/>
+        </g>
+        <path id="Path_513" d="M18.642 30.4l-7.056-7.056 7.056-7.056.932.932-6.124 6.129 6.124 6.124z" class="cls-2" data-name="Path 513" transform="translate(.276 -5.278)"/>
+    </g>
+</svg>

@@ -1,0 +1,8 @@
+// common styles are taken from 'users/manage-users/manage-users.component.scss
+// styleUrls: ['./manage-roles.component.scss', '../manage-users/manage-users.component.scss']
+
+.action {
+    img:not(:first-child) {
+        margin-left: 13%;
+    }
+}

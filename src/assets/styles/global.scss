@@ -1,0 +1,243 @@
+/* Global variables adn mixins are defined here */
+
+/* variables */
+
+$primary-clr-dark:#232f3e;
+$primary-clr-alpha: #00a8e1;
+$bg-clr:#f3f3f3;
+$bg-clr-alpha:#edeced;
+$primary-ft-clr:#595a5c;
+$primary-grey:#707070;
+$white:#ffffff;
+$black:#333333;
+$success: #347439;
+$failure: #ff0000;
+$grey: #cccccc;
+$primary-font:'Amazon Ember',sans-serif;
+$ft-thin:300;
+$ft-regular: 400;
+$ft-bold: 700;
+
+/* MIXINS */
+
+/* mixin for border radius */
+
+@mixin border-radius($top,
+$right,
+$bottom,
+$left) {
+    -webkit-border-radius: $top $right $bottom $left;
+    -moz-border-radius: $top $right $bottom $left;
+    border-radius: $top $right $bottom $left;
+}
+
+@mixin border-single-radius($rad) {
+    -webkit-border-radius: $rad;
+    -moz-border-radius: $rad;
+    border-radius: $rad;
+}
+
+/* To create a section at the center of window */
+@mixin  create-centered-section($width, $border-radius, $padding-tb, $padding-lr, $border,$background, $left) {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: $left;
+    right: 0;
+    bottom: 0;
+    width: $width;
+    height: 50vh;
+    // max-height: 520px;
+    border-radius: $border-radius;
+    padding: $padding-tb $padding-lr;
+    border: $border;
+    background: $background;
+}
+
+/* To include and adjust background image */
+@mixin  set-background-image($bg-color, $bg-url, $bg-position, $bg-repeat, $bg-size) {
+    background: $bg-color;
+    background-image: $bg-url;
+    background-position: $bg-position;
+    background-repeat: $bg-repeat;
+    background-size: $bg-size;
+}
+
+/* to split the input */
+@mixin  split-input($ltr-space, $bg-img, $bg-position, $bg-size, $bg-repeat, $bg-pos-x) {
+    border: 0;
+    letter-spacing: $ltr-space;
+    background-image: $bg-img;
+    background-position: bottom;
+    background-size: $bg-size;
+    background-repeat: $bg-repeat;
+    background-position-x: $bg-pos-x;
+   
+}
+
+/* box-shadow generator
+    $clr- in RGBA format
+ */
+
+@mixin box-shadows($hset,
+$vset,
+$blur,
+$spread,
+$clr) {
+    -webkit-box-shadow: $hset $vset $blur $spread $clr;
+    -moz-box-shadow: $hset $vset $blur $spread $clr;
+    box-shadow: $hset $vset $blur $spread $clr;
+}
+
+/*
+remove the autofilled background color
+*/
+ @mixin remove-autofill-background() {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition-delay: 99999s;
+        -webkit-transition-delay: 99999s;
+    }
+ }
+
+
+/* mixin for create buttons */
+
+@mixin create-buttons($bgClr,
+$clr,
+$ptb,
+$plr,
+$width,
+$height,
+$ft-size,
+$ft-weight,
+$rad) {
+    display: inline-block;
+    // padding: $ptb $plr;
+    margin-bottom: 0;
+    line-height: $height/2;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    @include border-single-radius($rad);
+    font-size: $ft-size;
+    font-weight: $ft-weight;
+    height: $height;
+    min-width: $width;
+    background: $bgClr;
+    color: $clr;
+    position: relative;
+    text-align: center;
+    &:disabled{
+        cursor: not-allowed;
+    }
+    &:focus{
+        outline: none;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+        // background: $clr;
+        // color: $bgClr;
+        // border: 1px solid $bgClr;
+        transition-duration: .5s;
+        transition-timing-function: ease-in-out;
+        text-decoration: none;
+    }
+}
+
+@mixin no-transition($bg-color, $color) {
+    &:hover,
+    &:focus,
+    &:active {
+        background: $bg-color;
+        color: $color;
+        border: 1px solid $bg-color;
+    } 
+}
+
+
+/* generate margin & padding */
+@mixin generate-margin($tp, $rt, $bt, $lt) {
+    margin: $tp $rt $bt $lt;
+}
+@mixin generate-padding($tp, $rt, $bt, $lt) {
+    padding: $tp $rt $bt $lt;
+}
+
+/* to set the table row */
+@mixin set-table-row($bg-color, $color, $border, $font-size, $font-weight, $fontFamily:"") {
+    background-color: $bg-color;
+    color: $color;
+    border: $border;
+    font-size: $font-size;
+    // font-weight: $font-weight;
+    font-weight: bold;
+    font-family: 'Amazon Ember Display Light';
+    @if $fontFamily != "" {
+        font-family: $fontFamily;
+        font-weight: $font-weight;
+      }
+}
+
+/* to set the image */
+@mixin set-image-config($width, $height, $cursor, $margin-right) {
+    width: $width;
+    height: $height;
+    cursor: $cursor;
+    margin-right: $margin-right;
+}
+
+/* to set the styles for first and last child div */
+@mixin set-child-div($color1, $font-size1, $font-weight1, $color2) {
+    div:first-child{
+        color: $color1;
+        font-size: $font-size1;
+        font-weight: $font-weight1;
+    } 
+    div:last-child{
+        color: $color2;
+    }
+}
+/* to set the font style */
+@mixin set-font-config($fontSize, $fontWeight, $fontColor, $textAlign, $fontFamily:"") {
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    color: $fontColor;
+    text-align: $textAlign;
+    @if $fontFamily != "" {
+        font-family: $fontFamily;
+      }
+}
+
+.ast-table {
+    .table{
+        margin-bottom: 0px;
+    }
+    table{
+        thead{
+            // @mixin set-table-row($bg-color, $color, $border, $font-size, $font-weight)
+            // @include set-table-row($white, #231f20, 0.5px solid #e2e2e1, 16px, 300) ;
+            th{
+                background-color: #edeced;
+                border: 1px solid #dee2e6;
+                border-top: none !important;
+            }           
+        }
+        td{
+            // @mixin set-table-row($bg-color, $color, $border, $font-size, $font-weight)
+            @include set-table-row(#fafafa, #231f20, 0.5px solid #e2e2e1, 16px, 300) ;
+        }
+    }
+}

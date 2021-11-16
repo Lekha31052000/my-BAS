@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+    <defs>
+        <style>
+            .cls-1{fill:#00a8e1;fill-rule:evenodd}
+        </style>
+    </defs>
+    <path id="Icon" d="M406-334h8v-10h-8v10zm0 8h8v-6h-8v6zm10 0h8v-10h-8v10zm0-18v6h8v-6z" class="cls-1" transform="translate(-406 344)"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="flag" width="24.835" height="21.043" viewBox="0 0 24.835 21.043">
+    <defs>
+        <style>
+            .cls-1{fill:#e94c39}.cls-2{fill:#449d45}.cls-3{fill:#f90}.cls-4{fill:#424a60}
+        </style>
+    </defs>
+    <path id="Path_451" d="M31.8 20.557H8V4h23.8l-5.174 8.278z" class="cls-1" data-name="Path 451" transform="translate(-6.965 -1.93)"/>
+    <path id="Path_455" d="M23.625 20.557H8V4h15.625l-3.4 8.278z" class="cls-2" data-name="Path 455" transform="translate(-6.965 -1.93)"/>
+    <path id="Path_456" d="M15.813 20.557H8V4h7.813l-1.7 8.278z" class="cls-3" data-name="Path 456" transform="translate(-6.965 -1.93)"/>
+    <path id="Path_452" d="M6.517 0C6.232 0 6 .157 6 .351v20.342c0 .194.232.351.517.351s.517-.157.517-.351V.351C7.035.157 6.8 0 6.517 0z" class="cls-4" data-name="Path 452" transform="translate(-6)"/>
+</svg>

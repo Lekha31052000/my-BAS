@@ -1,0 +1,213 @@
+@import 'src/assets/styles/global.scss';
+
+.login-container {
+  width: 100%;
+  height: 100vh;
+
+  .left-section {
+    position: relative;
+    height: 100vh;
+
+    .side-block {
+      float: left;
+      width: 187px;
+      height: 100%;
+      background-color: #146EB4;
+      box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 0.16);
+    }
+
+    .logo-section {
+      position: absolute;
+      display: inline;
+      bottom: 0;
+
+      .logo-title {
+        font-size: 92px;
+        color: $primary-grey;
+        line-height: 1.15;
+        margin-bottom: -6px;
+      }
+
+      img {
+        width: 62vh;
+        max-width: 40vw;
+        margin-bottom: -22px;
+      }
+    }
+  }
+
+  .login-wrapper {
+    height: 100vh;
+  }
+
+  .login-section {
+    // @mixin  create-centered-section($width, $border-radius, $padding-tb, $padding-lr, $border,$background, $left)
+    @include create-centered-section(370px, 0, 18px, 5px, none, none, -10%);
+
+    .form-group {
+      // to remove the background color of the autofilled elements
+      @include remove-autofill-background();
+      margin-bottom: 0px;
+
+      .error-section {
+        min-height: 20px !important;
+      }
+
+      label {
+        font-size: 15px;
+        color: $primary-clr-alpha;
+      }
+
+      .form-title {
+        font-size: 20px !important;
+      }
+
+      .login-info {
+        font-size: 14px;
+        color: $primary-grey;
+      }
+
+      p {
+        margin-bottom: 0px !important;
+      }
+
+      .form-control {
+        height: calc(1.5em + 0.75rem + 4px) !important;
+        border-bottom-color: $primary-grey;
+        // color: #495057 !important;
+      }
+    }
+
+    .login-submit {
+      margin-top: 5px;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+      @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 100%, 40px, 20px, bold, 5px);
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
+      // font-family: 'Amazon Ember Display Light';
+    }
+
+    .form-actions {
+      margin-top: 20px;
+    }
+
+    .help-section {
+      text-align: center;
+      color: $primary-clr-alpha;
+      margin-top: 20px;
+
+      a {
+        text-decoration: none;
+        color: $primary-clr-alpha;
+        letter-spacing: 0.75px;
+      }
+
+      a:nth-of-type(even) {
+        font-family: 'Amazon Ember';
+      }
+
+      .sign-up,
+      .forgot-password {
+        // @mixin set-font-config($fontSize, $fontWeight, $fontColor, $textAlign)
+        @include set-font-config(16px, 300, $primary-clr-alpha, center, 'Amazon Ember Display Light');
+        letter-spacing: 0.69px;
+
+        &:hover {
+          // color: #4a5c70;
+          // text-decoration: underline;
+          font-weight: bold;
+          transition-duration: 2s;
+        }
+      }
+
+      .forgot-password {
+        font-size: 14px !important;
+      }
+    }
+  }
+}
+
+@media (max-width:1440px) and (min-width:1024px) {
+  .login-container {
+    background-size: 53% !important;
+
+    .login-section {
+      padding: 8px 40px !important;
+
+      //   .logo {
+      //     margin: 30px 40px !important;
+      //   }
+    }
+  }
+}
+
+@media (max-width:1024px) and (min-width:768px) {
+  .login-container {
+    .login-section {
+      padding: 8px 40px !important;
+    }
+
+    .side-block {
+      width: 125px !important;
+    }
+
+    .logo-section {
+      .logo-title {
+        font-size: 75px !important;
+      }
+
+      img {
+        width: 59vh !important;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px !important;
+
+      label {
+        font-size: 22px !important;
+      }
+    }
+  }
+}
+
+@media (max-width:768px) {
+  .login-container {
+    .login-section {
+      max-height: 470px !important;
+      padding: 8px 40px !important;
+    }
+
+    .side-block {
+      width: 75px !important;
+    }
+
+    .logo-section {
+      .logo-title {
+        font-size: 65px !important;
+      }
+
+      img {
+        width: 50vh !important;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 10px !important;
+
+      label {
+        font-size: 18px !important;
+      }
+    }
+  }
+}
+
+@media (max-height:698px) and (min-height:520px) {
+  .login-container {
+    .login-section {
+      padding: 8px 40px !important;
+      top: -25%;
+    }
+
+  }
+}

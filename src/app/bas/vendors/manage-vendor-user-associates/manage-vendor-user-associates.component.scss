@@ -1,0 +1,15 @@
+@import '../../../../assets/styles/global.scss';
+
+.vendor-txt {
+  color: $primary-clr-alpha;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-container {
+  margin-top: 10px;
+}
+
+.txt-decoration {
+  text-decoration: underline;
+}

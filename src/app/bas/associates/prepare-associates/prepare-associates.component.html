@@ -1,0 +1,122 @@
+<div class="roles-container">
+    <div class="form-section">
+        <form class="login-form" [formGroup]="associateForm" (submit)="onSubmit()" autocomplete="off">
+            <div class="row no-gutter">
+                <div class="fm-title col-xs-12">Details</div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="first name">First Name</label>
+                    <input class="form-control text-capitalize" type="text" formControlName="first_name"
+                        placeholder="First Name" autocomplete="off" value="" maxlength="60" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="last name">Last Name</label>
+                    <input class="form-control text-capitalize" type="text" formControlName="last_name"
+                        placeholder="Last Name" autocomplete="off" value="" maxlength="60" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="contact">Mobile Number</label>
+                    <input class="form-control" formControlName="contact" type="text" placeholder="Mobile Number"
+                        autocomplete="off" value="" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="city">Hiring Agency</label>
+                    <input class="form-control text-uppercase" formControlName="agency" type="text"
+                        placeholder="Hiring Agency" autocomplete="off" value="" minlength="4" />
+                    <div class="error-section">
+                        <ng-container
+                            *ngIf="associateForm.controls.agency.errors && (associateForm.controls.agency.touched || associateForm.controls.agency.dirty)">
+                            <p class="err-msg" [hidden]="!associateForm.get('agency').hasError('minlength')">
+                                Must have at least 4 characters
+                            </p>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="city">Site Code</label>
+                    <input class="form-control text-uppercase" formControlName="site" type="text"
+                        placeholder="Site Code" autocomplete="off" value="" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="city">City</label>
+                    <input class="form-control" formControlName="city" type="text" placeholder="City" autocomplete="off"
+                        value="" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="govt_id_proof_type">Govt. ID Proof Type</label>
+                    <input class="form-control" formControlName="govt_id_proof_type" type="text"
+                        placeholder="Govt. ID Proof Type" autocomplete="off" value="" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="city">Govt. ID Proof</label>
+                    <input class="form-control" formControlName="govt_id_proof" type="text" placeholder="Govt. ID Proof"
+                        autocomplete="off" maxlength="20" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="job_type">Job Type</label>
+                    <input class="form-control" formControlName="job_type" type="text" placeholder="Job Type"
+                        autocomplete="off" value="" />
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="external_id">Amazon/Flex ID</label>
+                    <input class="form-control text-uppercase" formControlName="external_id" type="text" placeholder="Amazon/Flex ID"
+                        [validateInput]="{'alpha-numeric': true}" autocomplete="off" value="" minlength="3"
+                        maxlength="15" />
+                    <div class="error-section">
+                        <ng-container
+                            *ngIf="associateForm.controls.external_id.errors && (associateForm.controls.external_id.touched || associateForm.controls.external_id.dirty)">
+                            <p class="err-msg" [hidden]="!associateForm.get('external_id').hasError('minlength')">
+                                Must have at least 3 characters
+                            </p>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                    <label for="flag" class="required">Flag</label>
+                    <select class="form-control" formControlName="flag" value="" required
+                        *ngIf="auth.userDetails.role === 'superadmin'" (change)="checkFlag($event)">
+                        <option value="" disabled>Select Flag Type</option>
+                        <option value="ORANGE">Orange</option>
+                        <option value="GREEN">Green</option>
+                        <option value="RED">Red</option>
+                    </select>
+                    <select class="form-control" formControlName="flag" value="" required
+                        *ngIf="auth.userDetails.role !== 'superadmin' && isFlagEditable" (change)="checkFlag($event)"
+                        readonly>
+                        <option value="" disabled>Select Flag Type</option>
+                        <option value="ORANGE" [disabled]="checkFlagStatus === 'RED'">
+                            Orange</option>
+                        <option value="GREEN" [disabled]="checkFlagStatus === 'RED'">Green</option>
+                        <option value="RED">Red</option>
+                    </select>
+                    <input class="form-control text-capitalize"
+                        *ngIf="!isFlagEditable && auth.userDetails.role !== 'superadmin'" formControlName="flag"
+                        type="text" placeholder="Flag" autocomplete="off" readonly />
+                    <mat-error
+                        *ngIf="associateForm.controls.flag.errors &&(associateForm.controls.flag.touched && associateForm.controls.flag.dirty)">
+                        <mat-hint [hidden]="!associateForm.get('flag').hasError('required')">
+                            Flag Type is required
+                        </mat-hint>
+                    </mat-error>
+                </div>
+                <div class="form-group col-xs-5 col-sm-3 col-md-3" *ngIf="showRemarkTxt">
+                    <label class="required" for="job_type">Remark</label>
+                    <input class="form-control" formControlName="remark" type="text" placeholder="Remark"
+                        autocomplete="off" value="" />
+                </div>
+                <!-- <ng-template #viewFlag>
+                    <div class="form-group col-xs-5 col-sm-3 col-md-3">
+                        <label for="flag">Flagssss</label>
+                        <input class="form-control text-capitalize" formControlName="flag" type="text"
+                            placeholder="Flag" autocomplete="off" readonly />
+                    </div>
+                </ng-template> -->
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-class" name="cancelClass"
+                    routerLink="/manage-associates">Cancel</button>
+                <button type="submit" class="submit-class" name="submitClass"
+                    [disabled]="associateForm.invalid || associateForm.pristine">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,327 @@
+<div class="add-associate-modal">
+    <div class="dialog-header text-right">
+        <img src="assets/images/close-circle.svg" (click)="closeFingerprintModal(true)" />
+    </div>
+    <div class="dialog-body text-center">
+        <!-- {{step}} -- {{currentScanState}} - {{isFM220ServiceRunning}} {{isDeviceConnected}} -->
+        <ng-container
+            *ngIf="currentScanState == 'start' || currentScanState == 'leftFinger' || currentScanState == 'rightFinger' || currentScanState == 'new'">
+            <div class="scan-actions" [ngClass]="step > 0 && scannedImgSrc !== '' ? 'shift-up' : 'shift-down'">
+                <div class="scanned-img-wrapper" *ngIf="step > 0 && scannedImgSrc !== ''">
+                    <img id="FPImage1" [src]="scannedImgSrc" alt="Image" height="100%" width="90%" />
+                </div>
+                <p *ngIf="scanStatus == ''" id="info-msg" class="scan-info">{{scanStatusList[step]}}</p>
+                <p *ngIf="currentScanState != 'new' else scanDone" class="scan-info"
+                    [ngClass]="isScanFailed ? 'failure' : 'success'">{{scanStatus}}</p>
+                <ng-template #scanDone>
+                    <p class="scan-info new-assc">{{scanStatus}}</p>
+                </ng-template>
+                <div class="text-center dilaog-container">
+                    <div class="slider-wrapper">
+                        <mat-slider
+                            *ngIf="(currentScanState == 'leftFinger' || currentScanState == 'rightFinger') && (isFM220ServiceRunning && isDeviceConnected)"
+                            name="progressData" min="0" max="100" [value]="progressData" percent thumbLabel disabled>
+                        </mat-slider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- Enroll/Update Requesting or enroll status -->
+        <ng-container *ngIf="currentScanState == 'requesting' || currentScanState == 'failed'">
+            <div class="scan-actions enroll-status">
+                <p class="scan-info" [ngClass]="currentScanState == 'failed' ? 'failure' : 'success'">{{scanStatus}}</p>
+            </div>
+        </ng-container>
+        <!-- Enroll/Update Success  -->
+        <ng-container *ngIf="currentScanState == 'enrolled' || currentScanState == 'updated'">
+            <div class="scan-actions enroll-status">
+                <div class="scanned-img-wrapper">
+                    <img id="FPImage1" [src]="scannedImgSrc" alt="Image" height="100%" width="90%" />
+                </div>
+                <p class="scan-info" [ngClass]="currentScanState == 'updated' ? 'success' : 'new-assc'">{{scanStatus}}
+                </p>
+            </div>
+        </ng-container>
+        <!-- After scan, if Match Found  -->
+        <ng-container *ngIf="currentScanState == 'exists'">
+            <div class="agent-info">
+                <div class="info-header info-header-{{flag}}">
+                    <p class="float-left">User Data Exists</p>
+                    <img class="float-right" src="assets/images/tick-{{flag}}.svg" alt="">
+                </div>
+                <div class="info-body table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>First Name</td>
+                                <td class="text-capitalize">
+                                    {{matchedAssociate.first_name ? matchedAssociate.first_name : '-'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td class="text-capitalize">
+                                    {{matchedAssociate.last_name ? matchedAssociate.last_name : '-'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Amazon/Flex ID</td>
+                                <td>{{matchedAssociate.external_id ? matchedAssociate.external_id : '-'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="text-center dilaog-container">
+                <div class="slider-wrapper">
+                    <mat-slider name="progressData" min="0" max="100" [value]="progressData" percent thumbLabel
+                        disabled>
+                    </mat-slider>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Add/Update Agent Details -->
+        <ng-container *ngIf="currentScanState == 'add' || currentScanState == 'update'">
+            <div class="form-section">
+                <form class="login-form" [formGroup]="associateForm" autocomplete="off">
+                    <div class="row no-gutter">
+                        <div class="fm-title col-xs-12">Details</div>
+                        <div class="form-group">
+                            <label for="first name" class="required">First Name</label>
+                            <input class="form-control text-uppercase" type="text" formControlName="first_name"
+                                [validateInput]="{'alpha-numeric': true}" placeholder="First Name" autocomplete="off"
+                                value="" minlength="2" maxlength="30" />
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.first_name.errors &&(associateForm.controls.first_name.touched && associateForm.controls.first_name.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('first_name').hasError('required')">
+                                        First Name is required
+                                    </p>
+                                    <p class="err-msg"
+                                        [hidden]="!associateForm.get('first_name').hasError('minlength')">
+                                        Must have at least 2 characters
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last name" class="required">Last Name</label>
+                            <input class="form-control text-uppercase" type="text" formControlName="last_name"
+                                [validateInput]="{'alpha-numeric': true}" placeholder="Last Name" autocomplete="off"
+                                value="" maxlength="30" />
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.last_name.errors &&(associateForm.controls.last_name.touched && associateForm.controls.last_name.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('last_name').hasError('required')">
+                                        Last Name is required
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact" class="required">Mobile Number</label>
+                            <input class="form-control" formControlName="contact" type="text"
+                                [validateInput]="{'mobile-number': true}" placeholder="Mobile Number" minlength="10"
+                                maxlength="10" autocomplete="off" value="" />
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.contact.errors &&(associateForm.controls.contact.touched && associateForm.controls.contact.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('contact').hasError('required')">
+                                        Mobile Number is required
+                                    </p>
+                                    <p class="err-msg" [hidden]="!associateForm.get('contact').hasError('minlength')">
+                                        Mobile Number must have 10 digits
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Hiring Agency</label>
+                            <input class="form-control text-uppercase" formControlName="agency" type="text"
+                                placeholder="Hiring Agency" [validateInput]="{'alpha-numeric': true}" autocomplete="off"
+                                value="" minlength="4" />
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.agency.errors &&(associateForm.controls.agency.touched && associateForm.controls.agency.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('agency').hasError('minlength')">
+                                        Must have at least 4 characters
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city" class="required">Site Code</label>
+                            <ng-select class="add-associate-drop-down" [items]="siteCode" formControlName="site"
+                                bindLabel="sitecode" bindValue="sitecode" placeholder="Site Code"
+                                (change)="selectCity($event)" name="site">
+                            </ng-select>
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.site.errors &&(associateForm.controls.site.touched && associateForm.controls.site.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('site').hasError('required')">
+                                        Site Code is required
+                                    </p>
+                                    <p class="err-msg" [hidden]="!associateForm.get('site').hasError('minlength')">
+                                        Must have at least 4 characters
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city" class="required">City</label>
+                            <input class="form-control text-uppercase" formControlName="city" type="text"
+                                placeholder="City" [validateInput]="{'alpha-numeric': true}" autocomplete="off" value=""
+                                minlength="3" maxlength="30" readonly/>
+                            <div class="error-section">
+                                <ng-container
+                                    *ngIf="associateForm.controls.city.errors &&(associateForm.controls.city.touched && associateForm.controls.city.dirty)">
+                                    <p class="err-msg" [hidden]="!associateForm.get('city').hasError('required')">
+                                        City is required
+                                    </p>
+                                    <p class="err-msg" [hidden]="!associateForm.get('city').hasError('minlength')">
+                                        Must have at least 3 characters.
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <!-- *ngIf="currentScanState == 'add'" -->
+                        <ng-container>
+                            <div class="form-group">
+                                <label for="city" class="required">Govt. ID Proof Type</label>
+                                <select class="form-control" formControlName="govt_id_proof_type" required
+                                    (change)="checkGovtProof($event, true)">
+                                    <option value="" disabled>Select ID Proof Type</option>
+                                    <option *ngFor="let govtId of govtIdTypes" [value]="govtId.value">{{govtId.type}}
+                                    </option>
+                                    <!-- <option value="Aadhar">Aadhar</option>
+                                    <option value="VOTER_ID">Voter ID</option>
+                                    <option value="Pan Card">PAN Card</option>
+                                    <option value="DRIVING_LICENCE">Driving License</option> -->
+                                </select>
+                                <div class="error-section">
+                                    <ng-container
+                                        *ngIf="associateForm.controls.govt_id_proof_type.errors &&(associateForm.controls.govt_id_proof_type.touched && associateForm.controls.govt_id_proof_type.dirty)">
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('govt_id_proof_type').hasError('required')">
+                                            Govt. ID Proof Type is required
+                                        </p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="required">Govt. ID Proof</label>
+                                <input class="form-control text-uppercase" formControlName="govt_id_proof" type="text"
+                                    [validateInput]="{'alpha-numeric': true}" placeholder="Govt. ID Proof"
+                                    autocomplete="off" minlength="{{govtPropfMinLength}}"
+                                    maxlength="{{govtPropfMaxLength}}" />
+                                <div class="error-section">
+                                    <ng-container
+                                        *ngIf="associateForm.controls.govt_id_proof.errors &&(associateForm.controls.govt_id_proof.touched && associateForm.controls.govt_id_proof.dirty)">
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('govt_id_proof').hasError('required')">
+                                            Govt. ID Proof is required
+                                        </p>
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('govt_id_proof').hasError('min')">
+                                            Must have at least {{govtPropfMinLength}} characters
+                                        </p>
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('govt_id_proof').hasError('pattern')">
+                                            Govt.ID is invalid</p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="job_type" class="required">Job Type</label>
+                                <select class="form-control" formControlName="job_type" required>
+                                    <option value="" disabled>Select Job Type</option>
+                                    <option *ngFor="let job of jobTypes" [value]="job.value">{{job.type}}</option>
+                                </select>
+                                <div class="error-section">
+                                    <ng-container
+                                        *ngIf="associateForm.controls.job_type.errors &&(associateForm.controls.job_type.touched && associateForm.controls.job_type.dirty)">
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('job_type').hasError('required')">
+                                            Job Type is required
+                                        </p>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="currentScanState === 'update' && permissions.update">
+
+                                <div class="form-group" *ngIf="isFlagEditable else noFlagUpdate">
+                                    <label for="flag" class="required">Flag</label>
+                                    <select class="form-control" formControlName="flag" required>
+                                        <option value="" disabled>Select Flag</option>
+                                        <option value="ORANGE">Orange</option>
+                                        <option value="GREEN">Green</option>
+                                        <option value="RED">Red</option>
+                                    </select>
+                                    <ng-container
+                                        *ngIf="associateForm.controls.flag.errors &&(associateForm.controls.flag.touched && associateForm.controls.flag.dirty)">
+                                        <p class="err-msg" [hidden]="!associateForm.get('flag').hasError('required')">
+                                            Flag is required
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <ng-template #noFlagUpdate>
+                                    <div class="form-group">
+                                        <label for="city" class="required">Flag</label>
+                                        <input class="form-control text-capitalize" formControlName="flag" type="text"
+                                            placeholder="Flag" disabled />
+                                    </div>
+                                </ng-template>
+                                <div class="form-group">
+                                    <label for="external_id">Amazon/Flex Id</label>
+                                    <input class="form-control text-uppercase" formControlName="external_id"
+                                        [validateInput]="{'alpha-numeric': true}" type="text"
+                                        placeholder="Amazon/Flex Id" minlength="3" maxlength="15" autocomplete="off" />
+                                    <div class="error-section">
+                                        <p class="err-msg"
+                                            [hidden]="!associateForm.get('external_id').hasError('minlength')">
+                                            Must have at least 3 characters.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+                        <div class="form-group" *ngIf="showRemarkTxt">
+                            <label class="required" for="job_type">Remark</label>
+                            <input class="form-control text-uppercase" formControlName="remark" type="text"
+                                placeholder="Remark" [validateInput]="{'alpha-numeric': true}" autocomplete="off"
+                                value="" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
+
+        <div class="btn-actions mb-20">
+            <button *ngIf="(currentScanState == 'start' || step == 0) && !isScanFailed " type="button" class="add-assc"
+                (click)="onClickScan()">Scan</button>
+            <button *ngIf="step == 1 && !isScanFailed && currentScanState == 'rightFinger'" type="button"
+                class="add-assc" (click)="onClickScan()">Next</button>
+            <button *ngIf="(isScanFailed && step < 4)" type="button" class="add-assc"
+                (click)="onClickScan()">Rescan</button>
+            <button *ngIf="currentScanState == 'new'" type="button" class="add-assc" (click)="onClickAdd()">Add</button>
+            <ng-container *ngIf="(currentScanState == 'exists' && (flag == 'orange' || flag == 'green'))">
+                <button type="button" class="add-assc" (click)="onClickUpdate()">Update</button>
+                <button type="button" class="btn-continue" (click)="onClickContinueOrDismiss()">Continue</button>
+            </ng-container>
+
+            <ng-container *ngIf="currentScanState == 'add' || currentScanState == 'update'">
+                <button type="button"  [disabled]="associateForm.invalid || associateForm.pristine" class="btn-continue" (click)="onClickSave()">Save</button>
+            </ng-container>
+            <ng-container
+                *ngIf="(currentScanState == 'exists' && flag == 'red') || (currentScanState == 'update') || (currentScanState == 'exists' && !flag)">
+                <button type="button" class="btn-continue" (click)="onClickContinueOrDismiss()">Dismiss</button>
+            </ng-container>
+            <ng-container *ngIf="currentScanState == 'enrolled' || currentScanState == 'updated'">
+                <button type="button" class="btn-continue" (click)="onClickContinueOrDismiss()">Continue</button>
+            </ng-container>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="row no-gutter header-wrapper">
+    <div class="col-sm-7">
+        <h3 class="header-name">Biometric Authentication System</h3>
+    </div>
+    <div class="col-sm-5 keep-right">
+        <img class="notification mr-20" src="assets/images/notification.svg" alt="">
+        <div class="trigger-menu header-text">
+            <img src="assets/images/user.svg" alt="" [matMenuTriggerFor]="menu">
+            <p class="user-name text-capitalize">{{userName ? userName : 'Hello'}}</p>
+        </div>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <div *ngFor="let menu of dropDownMenuList">
+                <a class="dropdown-item" (click)="onMenuClick(menu.menu_name)">{{menu.menu_name}}</a>
+            </div>
+        </mat-menu>
+    </div>
+</div>

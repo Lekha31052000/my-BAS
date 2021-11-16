@@ -1,0 +1,51 @@
+<div class="confirmation-container" *ngIf="slectConfirmation">
+  <div class="confirmation-header">
+    <p class="float-left">{{data.title}}</p>
+    <img class="float-right" src="assets/images/close@2x.png" (click)="closeModal(false)">
+  </div>
+  <div class="confirmation-data">
+    <p *ngIf="data.message == '' else message">
+      Your request for login is submitted.
+    </p>
+    <ng-template #message>
+      <p class="text-left">{{data.message}}</p>
+    </ng-template>
+    <div class="confirm-action">
+      <button type="button" class="confirm text-capitalize" (click)="closeModal(true)">{{buttonLableSubmit}}</button>
+      <button type="button" class="cancel" (click)="closeModal(false)"
+        *ngIf="buttonLableCancel">{{buttonLableCancel}}</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="confirmation-container" *ngIf="selectVendor">
+  <div class="confirmation-header">
+    <p class="float-left">Select a Vendor</p>
+    <img class="float-right" src="assets/images/close@2x.png" (click)="closeModal(false)">
+  </div>
+  <div class="confirmation-data">
+    <form class="user-form" [formGroup]="userForm" (submit)="onSubmit()" autocomplete="off">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+          <label for="reporting manager">Vendor Name</label>
+          <ng-container *ngIf="vendorCollections.length > 0; else noVendors">
+            <ng-select class="select-drop-down col-lg-8 col-md-8 p-0" [items]="vendorCollections"
+              formControlName="vendor" bindLabel="fullOrganisationName" [clearable]="false" (search)="searchVendor()"
+              placeholder="Select Vendor" name="role">
+            </ng-select>
+          </ng-container>
+          <ng-template #noVendors>
+            <input class="form-control" type="text" placeholder="No Vendors" disabled />
+          </ng-template>
+        </div>
+      </div>
+      <div class="form-actions confirm-action">
+        <button type="submit" class="confirm" name="submitClass"
+          [disabled]="userForm.invalid || userForm.pristine">Save</button>
+        <button type="button" class=" cancel" name="cancelClass" (click)="closeModal(false)">Cancel</button>
+      </div>
+    </form>
+    <div class="clearfix"></div>
+  </div>
+</div>

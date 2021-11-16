@@ -1,0 +1,81 @@
+<div class="change-password-container">
+    <div class="change-password">
+        <div class="change-password-header">
+            <p class="form-title">Personal Information</p>
+            <span class="form-info">Update your personal information</span>
+        </div>
+        <form class="change-password-form table-responsive text-center" [formGroup]="profileForm" autocomplete="off"
+            (submit)="updateProfile()">
+            <div class="form-elements">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><label for="firstname" class="required">First Name</label></td>
+                            <td>
+                                <input class="form-control" type="text" formControlName="firstname"
+                                    placeholder="First Name" autocomplete="off" value="" minlength="2" maxlength="30"
+                                    required />
+                                <div class="error-section">
+                                    <ng-container *ngIf="profileForm.controls.firstname.errors &&(profileForm.controls.firstname.touched &&
+                                                            profileForm.controls.firstname.dirty)">
+                                        <p class="err-msg"
+                                            [hidden]="!profileForm.get('firstname').hasError('required')">
+                                            First Name is required</p>
+                                        <p class="err-msg"
+                                            [hidden]="!profileForm.get('firstname').hasError('minlength')">
+                                            Minimum 2 characters required</p>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="lastname" class="required">Last Name</label></td>
+                            <td>
+                                <input class="form-control" type="text" formControlName="lastname"
+                                    placeholder="Last Name" autocomplete="off" value="" minlength="1" maxlength="30"
+                                    required />
+                                <div class="error-section">
+                                    <ng-container *ngIf="profileForm.controls.lastname.errors &&(profileForm.controls.lastname.touched &&
+                                                            profileForm.controls.lastname.dirty)">
+                                        <p class="err-msg" [hidden]="!profileForm.get('lastname').hasError('required')">
+                                            First Name is required</p>
+                                        <p class="err-msg"
+                                            [hidden]="!profileForm.get('lastname').hasError('minlength')">
+                                            Minimum 1 character required</p>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="mobile" class="required">Mobile Number</label></td>
+                            <td>
+                                <input class="form-control" formControlName="mobile" type="text" minlength="10"
+                                    maxlength="10" placeholder="Mobile Number" autocomplete="off" value=""
+                                    [validateInput]="{'mobile-number': true}" required />
+                                <div class="error-section">
+                                    <ng-container *ngIf="profileForm.controls.mobile.errors || (profileForm.controls.mobile.touched &&
+                                                            profileForm.controls.mobile.dirty)">
+                                        <p class="err-msg" [hidden]="!profileForm.get('mobile').hasError('required')">
+                                            Mobile Number required</p>
+
+                                        <p class="err-msg" [hidden]="!profileForm.get('mobile').hasError('pattern')">
+                                            Mobile Number is invalid</p>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="form-actions text-center">
+                <button type="submit" class="submit-pwd" name="submitPassword"
+                    [disabled]="profileForm.invalid">Submit</button>
+                <!-- <button type="button" class="cancel-pwd" name="cancelPassword"
+                    (click)="cancelPassword()">Cancel</button> -->
+            </div>
+        </form>
+    </div>
+
+</div>

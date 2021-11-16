@@ -1,0 +1,142 @@
+@import 'src/assets/styles/global.scss';
+.create-role,
+.show-permissions{
+    width: 100%;
+    padding: 10px 20px;
+    background-color: $white;
+}
+.show-permissions{
+    padding-bottom: 15px;
+}
+
+.create-role {
+    height: 90px;   
+    border-radius: 5px;
+    box-shadow: -5px 5px 12px 0 rgba(0, 0, 0, 0.1);
+
+    div.form-group:first-child {
+        width: 30%;
+        margin-right: 25px;
+        margin-bottom: 0px;
+    }
+
+    div.form-group:nth-of-type(even) {
+        width: 40%;
+    }
+}
+
+.show-permissions {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+    margin-top: 25px;
+}
+
+.form-title {
+    font-size: 20px;
+    margin-top: 40px;
+    font-weight: normal;
+}
+
+.form-group {
+    .mat-form-field {
+        display: block !important;
+    }
+
+    // to remove the background color of the autofilled elements
+    @include remove-autofill-background();
+}
+
+.module-head {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.form-actions {
+    padding: 35px 35px 0 0;
+    width: 100%;
+    text-align: right;
+
+    .submit-class {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    // @mixin create-buttons($bgClr, $clr, $ptb, $plr, $width, $height, $ft-size, $ft-weight, $rad)
+    .submit-class {
+        // @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 188px, 42px, 18px, 300, 5px);
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($primary-clr-alpha,$white,6px,12px,120px,40px,18px,300,20px);
+    }
+
+    .cancel-class {
+        // @mixin create-buttons($bgClr, $clr, $ptb, $plr, $width, $height, $ft-size, $ft-weight, $rad)
+        // @include create-buttons(#edeced, $primary-clr-dark, 6px, 12px, 188px, 42px, 18px, 300, 5px);
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($white,$primary-clr-alpha,6px,12px,120px,40px,18px,300,20px);
+        border: 1px solid $primary-clr-alpha;
+        margin-right: 10px;
+    }
+}
+
+.modules-div {
+    // border: 1px solid rgb(181, 181, 181);
+    border-bottom: 0;
+    background-color: $white;
+    width: 100%;
+    overflow: auto;
+    color: #727272;
+    .module-header{
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        margin-bottom: 20px;
+    }
+    .module-title{
+        font-size: 18px;
+        font-weight: bold;
+        color: $primary-clr-alpha;
+    }
+
+    .each-module {
+        padding: 2px 20px;
+        min-width: 450px;
+        overflow: auto;
+        label{
+            margin-bottom: 5px !important;
+        }
+    }
+}
+
+.permissions-main-div {
+    max-height: 45vh;
+    overflow-y: auto;
+    padding: 1% 3% 2% 0.5%;
+    border: 1px solid #ccc;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.each-row-cls {
+    padding-bottom: 7px;
+}
+
+.permissions-indvi-col {
+    padding-left: 0px !important;
+}
+
+.module-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.set-name {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+    height: 21px !important;
+    width: 21px !important;
+    // border: solid 0.5px #d1d1d1 !important;
+}
+
+
+@media (min-width:1025px) and (max-width:1440px) {}
+
+@media (min-width:769px) and (max-width:1024px) {}

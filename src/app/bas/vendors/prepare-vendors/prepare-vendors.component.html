@@ -1,0 +1,160 @@
+<div class="row no-gutter p-content">
+  <div class="col-sm-5 col-md-5 col-lg-5 layout-header">
+    <div class="vendor-txt">
+      <span
+        ><img
+          class="cursor-pointer"
+          (click)="goBacktoList()"
+          src="../../../../assets/images/back.svg"
+          alt=""
+      /></span>
+      {{ vendorId ? "Edit" : "Add" }} Vendor
+    </div>
+  </div>
+</div>
+<div class="roles-container">
+  <form
+    class="user-form"
+    [formGroup]="vednorForm"
+    (submit)="onSubmit()"
+    autocomplete="off"
+  >
+    <div class="row no-gutter user-details">
+      <div class="row no-gutter details">
+        <div class="fm-title col-xs-12">Details</div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="Organisation name" class="required"
+            >Organisation Name</label
+          >
+          <input
+            class="form-control text-capitalize"
+            type="text"
+            formControlName="organizationname"
+            placeholder="Organisation Name"
+            minlength="2"
+            maxlength="30"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                vednorForm.controls.organizationname.errors &&
+                (vednorForm.controls.organizationname.touched ||
+                  vednorForm.controls.organizationname.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="
+                  !vednorForm.get('organizationname').hasError('required')
+                "
+              >
+                Organisation Name is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="
+                  !vednorForm.get('organizationname').hasError('minlength')
+                "
+              >
+                Must have at least 2 characters
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="domain name" class="required">Domain Name</label>
+          <input
+            class="form-control text-capitalize"
+            type="text"
+            formControlName="domainname"
+            placeholder="Domain Name"
+            maxlength="30"
+            minlength="2"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                vednorForm.controls.domainname.errors &&
+                (vednorForm.controls.domainname.touched ||
+                  vednorForm.controls.domainname.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!vednorForm.get('domainname').hasError('required')"
+              >
+                Domain Name is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="!vednorForm.get('domainname').hasError('minlength')"
+              >
+                Must have at least 2 characters
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="mobile" class="required">Contact Person</label>
+          <input
+            class="form-control"
+            formControlName="contactperson"
+            type="text"
+            maxlength="30"
+            placeholder="Contact Person"
+            minlength="2"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                vednorForm.controls.contactperson.errors &&
+                (vednorForm.controls.contactperson.touched ||
+                  vednorForm.controls.contactperson.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!vednorForm.get('contactperson').hasError('required')"
+              >
+                Contact Person is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="
+                  !vednorForm.get('contactperson').hasError('minlength')
+                "
+              >
+                Must have at least 2 characters
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="cancel-class"
+          name="cancelClass"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="submit-class"
+          name="submitClass"
+          [disabled]="vednorForm.invalid || vednorForm.pristine"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

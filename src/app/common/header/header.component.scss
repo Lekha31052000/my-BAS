@@ -1,0 +1,75 @@
+@import "../../../assets/styles/global.scss";
+
+.header-wrapper {
+    padding: 10px 20px;
+    background-color: $white;
+    color: $primary-clr-alpha;
+    height: 80px;
+    width: 100%;
+
+    .header-name {
+        color: #5a5a5a;
+        // color: $primary-clr-alpha;
+        padding-top: 15px;
+        font-size: 24px;
+        font-weight: $ft-thin;
+        margin: 0;
+    }
+
+    .keep-right {
+        text-align: right;
+        padding: 5px 10px;
+
+        .notification {
+            -webkit-filter: grayscale(100%) opacity(0.5);
+            filter: grayscale(100%) opacity(0.5);
+        }
+
+        form {
+            display: inline;
+            font-size: 14px;
+
+            .mat-form-field {
+                width: 20vw;
+            }
+        }
+
+        mat-menu {
+            cursor: pointer !important;
+        }
+
+        .trigger-menu {
+            display: inline-block;
+            text-align: left;
+            outline: none;
+            background-color: transparent;
+            border: none;
+            font-size: 14px;
+            margin-top: 10px;
+            max-width: 200px;
+
+            img {
+                width: 28px;
+                margin-right: 20px;
+                cursor: pointer;
+                // -webkit-filter: grayscale(100%) opacity(0.5);
+                // filter: grayscale(100%) opacity(0.5);
+            }
+
+            .mat-menu-item {
+                outline: none;
+            }
+
+            .user-name {
+                display: inline-block;
+                text-overflow: ellipsis;
+                max-width: 130px;
+                overflow: hidden;
+                white-space: nowrap;
+                vertical-align: middle;
+                color: #b3b3b3;
+                font-size: 14px;
+            }
+        }
+    }
+}

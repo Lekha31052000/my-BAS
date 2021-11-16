@@ -1,0 +1,554 @@
+<!-- <div class="form-actions">
+  <button
+    type="button"
+    class="cancel-class"
+    name="cancelClass"
+    (click)="onCancel()"
+  >
+    Cancel
+  </button>
+  <button
+    type="submit"
+    class="submit-class"
+    name="submitClass"
+    [disabled]="userForm.invalid || userForm.pristine"
+  >
+    Save
+  </button>
+</div> -->
+
+<div class="roles-container">
+  <form
+    class="user-form"
+    [formGroup]="userForm"
+    (submit)="onSubmit()"
+    autocomplete="off"
+  >
+    <div class="row no-gutter create-role">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            class="text-capitalize"
+            type="text"
+            formControlName="userName"
+            placeholder="Full Name"
+            minlength="2"
+            maxlength="25"
+            autocomplete="off"
+            required
+          />
+          <mat-error
+            *ngIf="
+              userForm.controls.userName.errors &&
+              (userForm.controls.userName.touched ||
+                userForm.controls.userName.dirty)
+            "
+          >
+            <mat-hint [hidden]="!userForm.get('userName').hasError('required')">
+              Name is required
+            </mat-hint>
+            <mat-hint
+              [hidden]="!userForm.get('userName').hasError('minlength')"
+            >
+              Name must be atleast 2 characters
+            </mat-hint>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="email"
+            placeholder="Email ID"
+            maxlength="50"
+            autocomplete="off"
+            required
+          />
+          <mat-error
+            *ngIf="
+              userForm.controls.email.errors &&
+              (userForm.controls.email.touched || userForm.controls.email.dirty)
+            "
+          >
+            <mat-hint [hidden]="!userForm.get('email').hasError('required')">
+              Email ID is required
+            </mat-hint>
+            <mat-hint [hidden]="!userForm.get('email').hasError('pattern')">
+              Invalid Email Address
+            </mat-hint>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <mat-select formControlName="role" placeholder="Select Role" required>
+            <!-- <mat-option>
+                            <ngx-mat-select-search id="user" formControlName="searchRole"
+                                [placeholderLabel]="'Search Role'" [noEntriesFoundLabel]="'No matching roles found'"
+                                (ngModelChange)="filterRoles($event)"></ngx-mat-select-search>
+                        </mat-option> -->
+            <mat-option *ngIf="!allRoles.length" value="" disabled
+              >No Roles Available</mat-option
+            >
+            <mat-option
+              *ngFor="let role of allRoles; let roleIndex = index"
+              [(value)]="role.role"
+            >
+              {{ role.role }}</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="
+              userForm.controls.role.errors &&
+              (userForm.controls.role.touched || userForm.controls.role.dirty)
+            "
+          >
+            <mat-hint [hidden]="!userForm.get('role').hasError('required')">
+              Role is required
+            </mat-hint>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row no-gutter user-details">
+      <div class="row no-gutter details">
+        <div class="fm-title col-xs-12">Details</div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="first name" class="required">First Name</label>
+          <input
+            class="form-control text-capitalize"
+            type="text"
+            formControlName="firstname"
+            placeholder="First Name"
+            minlength="2"
+            maxlength="30"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                userForm.controls.firstname.errors &&
+                (userForm.controls.firstname.touched ||
+                  userForm.controls.firstname.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('firstname').hasError('required')"
+              >
+                First Name is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('firstname').hasError('minlength')"
+              >
+                Must have at least 2 characters
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="last name" class="required">Last Name</label>
+          <input
+            class="form-control text-capitalize"
+            type="text"
+            formControlName="lastname"
+            placeholder="Last Name"
+            maxlength="30"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                userForm.controls.lastname.errors &&
+                (userForm.controls.lastname.touched ||
+                  userForm.controls.lastname.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('lastname').hasError('required')"
+              >
+                Last Name is required
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="mobile" class="required">Mobile Number</label>
+          <input
+            class="form-control"
+            formControlName="mobile"
+            type="text"
+            minlength="10"
+            maxlength="10"
+            placeholder="Mobile Number"
+            [validateInput]="{ 'mobile-number': true }"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                userForm.controls.mobile.errors &&
+                (userForm.controls.mobile.touched ||
+                  userForm.controls.mobile.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('mobile').hasError('required')"
+              >
+                Mobile Number is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('mobile').hasError('minlength')"
+              >
+                Must include 10 digit
+              </p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="reporting manager" class="required"
+            >Reporting Manager Email ID</label
+          >
+          <input
+            class="form-control"
+            formControlName="reporting_manager"
+            type="email"
+            maxlength="50"
+            placeholder="Reporting Manager Email ID"
+            autocomplete="off"
+            required
+          />
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                userForm.controls.reporting_manager.errors &&
+                (userForm.controls.reporting_manager.touched ||
+                  userForm.controls.reporting_manager.dirty)
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="
+                  !userForm.get('reporting_manager').hasError('required')
+                "
+              >
+                Reporting Manager Email Id is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="
+                  !userForm.get('reporting_manager').hasError('pattern')
+                "
+              >
+                Invalid Email Id
+              </p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group col-xs-5 col-sm-3 col-md-3" *ngIf="hideVendor">
+          <label for="vendor" class="required">Vendor Name</label>
+          <ng-container *ngIf="vendorCollections.length > 0; else noVendors">
+            <ng-select
+              class="select-drop-down col-lg-8 col-md-8 p-0"
+              [items]="vendorCollections"
+              formControlName="vendor"
+              bindLabel="fullOrganisationName"
+              [clearable]="false"
+              (search)="searchVendor()"
+              placeholder="Select Vendor"
+              name="vendor"
+              required
+            >
+            </ng-select>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              !userForm.controls.vendor.hasError('required') ||
+              (userForm.controls.vendor.errors &&
+                (userForm.controls.vendor.touched ||
+                  userForm.controls.vendor.dirty))
+            "
+          >
+            <p
+              class="err-msg"
+              [hidden]="!userForm.get('vendor').hasError('required')"
+            >
+              vendor is required
+            </p>
+          </ng-container>
+          <ng-template #noVendors>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="No Vendors"
+              disabled
+            />
+          </ng-template>
+        </div>
+
+        <div class="form-group col-xs-5 col-sm-3 col-md-3">
+          <label for="site" class="required">Site Code</label>
+          <ng-select
+            class="add-associate-drop-down"
+            [items]="siteCode"
+            formControlName="site"
+            bindLabel="sitecode"
+            bindValue="sitecode"
+            placeholder="Site Code"
+            (change)="getStationCodes()"
+            name="site"
+          >
+          </ng-select>
+          <div class="error-section">
+            <ng-container
+              *ngIf="
+                userForm.controls.site.errors &&
+                userForm.controls.site.touched &&
+                userForm.controls.site.dirty
+              "
+            >
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('site').hasError('required')"
+              >
+                Site Code is required
+              </p>
+              <p
+                class="err-msg"
+                [hidden]="!userForm.get('site').hasError('minlength')"
+              >
+                Must have at least 4 characters
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="form-actions">
+                <button type="button" class="cancel-class" name="cancelClass" (click)="onCancel()">Cancel</button>
+                <button type="submit" class="submit-class" name="submitClass"
+                    [disabled]="userForm.invalid || userForm.pristine">Save</button>
+            </div> -->
+
+      <div class="roles-container">
+        <form
+          class="user-form"
+          [formGroup]="vednorForm"
+          (submit)="onSubmit()"
+          autocomplete="off"
+        >
+          <!-- <div class="row no-gutter user-details">
+          <div class="row no-gutter details"> -->
+          <div class="fm-title col-xs-12">
+            <span style="padding-left: 5px">ADD SITES </span>
+
+            <div class="custom-search text-right" style="margin-right: 8px">
+              <form [formGroup]="searchForm">
+                <div class="form-group">
+                  <img
+                    matSuffix
+                    class="search-icon"
+                    src="assets/images/search-icon.png"
+                  />
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="searchText"
+                    placeholder="Search Sites"
+                    maxlength="80"
+                    autocomplete="off"
+                    (keyup)="onSearch($event)"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="fm-titlee" *ngIf="selectedSites.length > 0">
+            Assigned Sites
+          </div>
+          <div class="row justify-content-start">
+            <div class="add-site col-12">
+              <mat-grid-list
+                *ngIf="selectedSites.length > 0"
+                cols="9"
+                rowHeight="2:1"
+                class="grid-layout-custom"
+              >
+                <ng-container *ngFor="let item of selectedSites; let i = index">
+                  <mat-grid-tile
+                    ><input
+                      type="checkbox"
+                      [value]="item"
+                      [checked]="item"
+                      (change)="assignSiteChange($event)"
+                      required
+                    />
+                    <label class="text-capitalize"> {{ item }} </label>
+                  </mat-grid-tile>
+                </ng-container>
+              </mat-grid-list>
+            </div>
+          </div>
+          <div class="fm-titlee" *ngIf="unselectedSites.length > 0">
+            Available Sites
+          </div>
+          <div class="row justify-content-start">
+            <div class="add-site col-12">
+              <mat-grid-list
+                *ngIf="unselectedSites.length > 0"
+                cols="9"
+                rowHeight="2:1"
+                class="grid-layout-custom"
+              >
+                <!-- <ng-container
+                            *ngFor="let item of unselectedSites; let i = index"
+                          > -->
+                <ng-container
+                  *ngFor="let item of unselectedSites; let i = index"
+                >
+                  <mat-grid-tile class="mat-figure"
+                    ><input
+                      type="checkbox"
+                      [value]="item"
+                      (change)="availableSiteChange($event)"
+                      required
+                    />
+                    <label class="text-capitalize"> {{ item }} </label>
+                  </mat-grid-tile>
+                </ng-container>
+              </mat-grid-list>
+            </div>
+          </div>
+          <!-- </div> -->
+          <!-- </form> -->
+
+          <!-- </div>
+        </div> -->
+        </form>
+      </div>
+
+      <!-- h -->
+    </div>
+  </form>
+
+  <!-- <div class="container">
+    <div class="row justify-content-start">
+        <div class="col-12">
+            <span class="fm-title pr-5">ADD SITES</span>
+            <div class="custom-search text-right">
+                <form [formGroup]="searchForm">
+                    <div class="form-group">
+                        <img matSuffix class="search-icon" src="assets/images/search-icon.png" />
+                        <input class="form-control" type="text" formControlName="searchText" placeholder="Search Sites"
+                            maxlength="60" autocomplete="off" (keyup)="onSearch($event)" required/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+  <!-- <div class="roles-container">
+    <form
+      class="user-form"
+      [formGroup]="vednorForm"
+      (submit)="onSubmit()"
+      autocomplete="off"
+    >
+      <div class="row no-gutter user-details">
+        <div class="row no-gutter details">
+          <div class="fm-title col-xs-12">
+            <span style="padding-left: 5px">ADD SITES </span>
+
+            <div class="custom-search text-right" style="margin-right: 8px">
+              <form [formGroup]="searchForm">
+                <div class="form-group">
+                  <img
+                    matSuffix
+                    class="search-icon"
+                    src="assets/images/search-icon.png"
+                  />
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="searchText"
+                    placeholder="Search Sites"
+                    maxlength="80"
+                    autocomplete="off"
+                    (keyup)="onSearch($event)"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="fm-titlee">Assigned Sites</div>
+          <div class="row justify-content-start">
+            <div class="add-site col-12">
+              <mat-grid-list
+                cols="9"
+                rowHeight="2:1"
+                class="grid-layout-custom"
+              >
+                <ng-container *ngFor="let item of selectedSites; let i = index">
+                  <mat-grid-tile
+                    ><input
+                      type="checkbox"
+                      [value]="item"
+                      [checked]="item"
+                      (change)="assignSiteChange($event)"
+                      required
+                    />
+                    <label class="text-capitalize"> {{ item }} </label>
+                  </mat-grid-tile>
+                </ng-container>
+              </mat-grid-list>
+            </div>
+          </div>
+          <div class="fm-titlee">Available Sites</div>
+          <div class="row justify-content-start">
+            <div class="add-site col-12">
+              <mat-grid-list
+                cols="9"
+                rowHeight="2:1"
+                class="grid-layout-custom"
+              >
+                
+                <ng-container
+                  *ngFor="let item of unselectedSites; let i = index"
+                >
+                  <mat-grid-tile
+                    ><input
+                      type="checkbox"
+                      [value]="item"
+                      (change)="availableSiteChange($event)"
+                      required
+                    />
+                    <label class="text-capitalize"> {{ item }} </label>
+                  </mat-grid-tile>
+                </ng-container>
+              </mat-grid-list>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </form>
+  </div> -->
+</div>

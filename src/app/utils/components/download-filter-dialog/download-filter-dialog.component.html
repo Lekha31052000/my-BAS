@@ -1,0 +1,145 @@
+<div class="filters">
+    <div class="row filter-header">
+        <div class="col-lg-11 col-md-11 report-generation-txt">
+            Report Generation
+        </div>
+        <div class="col-lg-1 col-md-1">
+            <img src="assets/images/close@2x.png" (click)="close()" class="cursor-pointer close" alt="">
+        </div>
+    </div>
+    <form class="user-form" [formGroup]="filterForm" (submit)="onSubmit()" autocomplete="off">
+        <div class="row mt-20 fmp-dashboard">
+            <div class="col-md-3 col-lg-3">
+                <div class="form-group">
+                    <label name="role">Job Type</label>
+                    <ng-select class="select-drop-down col-lg-8 col-md-8 p-0" [items]="jobCollections"
+                        formControlName="jobType" bindLabel="type" [clearable]="false" placeholder="Select" name="role"
+                        [searchable]="false" (change)="selectedJobType($event)" required>
+                    </ng-select>
+                </div>
+            </div>
+           <div class="col-md-3 col-lg-3" *ngIf="data === 'Associates'">
+                <div class="form-group">
+                    <label name="role">Flag</label>
+                    <ng-select class="select-drop-down col-lg-8 col-md-8 p-0" formControlName="flag"
+                        [items]="flagCollections" bindLabel="type" [clearable]="false" placeholder="Select" name="role"
+                        [searchable]="false" required>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class="form-group">
+                    <label name="role">Duration</label>
+                    <ng-select class="select-drop-down col-lg-8 col-md-8 p-0" [items]="durationCollections"
+                        bindLabel="type" [clearable]="false" (click)="check($event)" formControlName="duration"
+                        (change)="range($event)" placeholder="Select" name="role" [searchable]="false" required>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3" *ngIf="showCalendarInput">
+                <div class="form-group calendar-group col-lg-8 col-md-8">
+                    <label name="role">Calendar</label>
+                    <input type="text" class="form-control" name="startDate" 
+                        value="{{fromData}}">
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3" *ngIf="showCustomCalendar">
+                <div class="form-group calendar-group col-lg-10 col-md-10">
+                    <label name="role">Calendar</label>
+                    <div>
+                        <label name="role">From</label>
+                    </div>
+                    <input type="text" class="form-control co-lg-8 col-md-8 display-inline" [owlDateTime]="dt3"
+                        name="startingDate" formControlName="startCustomDate" (dateTimeChange)="clearEndDate($event)">
+                    <img class=" ml-10 cursor-pointer" src="assets/images/calendar.svg" alt=""
+                        [owlDateTimeTrigger]="dt3">
+                    <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3" style="margin-top: 3%;" *ngIf="showCustomCalendar && data === 'History'">
+                <div class="form-group calendar-group col-lg-10 col-md-10">
+                    <div>
+                        <label name="role">To</label>
+                    </div>
+                    <input type="text" class="form-control co-lg-8 col-md-8 display-inline" formControlName="endDate"
+                        [owlDateTime]="dt4" (dateTimeChange)="clearEndDate($event)" [min]="minCustomDate" disabled>
+                    <img class=" ml-10 cursor-pointer" src="assets/images/calendar.svg" alt=""
+                        [owlDateTimeTrigger]="dt4">
+                    <owl-date-time [pickerType]="'calendar'" #dt4></owl-date-time>
+                </div>
+            </div>
+            <div *ngIf="showCalendar" class="fmp-dashboard-content">
+                <div class="content-bg">
+                    <div class="row no-margin border-bottom-content" *ngIf="showYearInfo">
+                        <div class="col-md-4 col-lg-4 arrow-left cursor-pointer" (click)="decreaseYear()">
+                            <img src="assets/images/arrows-left.svg" alt="">
+                        </div>
+                        <div class="col-md-4 col-lg-4 cursor-pointer">
+                            {{selectedYear}}
+                        </div>
+                        <div class="col-md-4 col-lg-4  arrow-left cursor-pointer" (click)="increaseYear()">
+                            <img src="assets/images/right-chevron.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="row no-margin border-bottom-content" *ngIf="showMonthInfo">
+                        <div class="col-md-4 col-lg-4 arrow-left cursor-pointer">
+                            <img src="assets/images/arrows-left.svg" (click)="decreaseMonth()" alt="">
+                        </div>
+                        <div class="col-md-4 col-lg-4 cursor-pointer" (click)="displayCalendar('month')">
+                            {{Month}}
+                        </div>
+                        <div class="col-md-4 col-lg-4 cursor-pointer arrow-left">
+                            <img src="assets/images/right-chevron.svg" alt="" (click)="increaseMonth()">
+                        </div>
+                    </div>
+                    <div class="row calendar-info" *ngIf="showYearCalendar">
+                        <div class="col-md-4 col-lg-4 p-0 cursor-pointer mt-10"
+                            [ngClass]="active === i ? 'active-tab' : ' '" *ngFor="let itemYear of year;let i = index"
+                            (click)="selectYears(i)">
+                            {{itemYear}}
+                        </div>
+                    </div>
+                    <div class="row calendar-info" *ngIf="showMonthCalendar">
+                        <div class="col-md-4 col-lg-4 p-0 cursor-pointer" [ngClass]="active === i ? 'active-tab' : ' '"
+                            *ngFor="let itemMonth of monthArray;let i = index" (click)="selectMonth(i)">
+                            {{itemMonth}}
+                        </div>
+                    </div>
+                    <div class="row calendar-info" *ngIf="showQuarterCalendar">
+                        <div class="col-md-12 col-lg-12 p-0 cursor-pointer"
+                            [ngClass]="active === i ? 'active-tab' : ' '"
+                            *ngFor="let itemQuarter of quarterArray;let i = index"
+                            (click)="selectQuarter(itemQuarter,i)">
+                            {{itemQuarter.quarter}} ({{itemQuarter.month}})
+                        </div>
+                    </div>
+                    <div class="row calendar-info" *ngIf="showWeeks">
+                        <div class="col-md-12 col-lg-12 p-0 cursor-pointer"
+                            [ngClass]="active === i ? 'active-tab' : ' '" *ngFor="let itemWeek of weeks;let i = index"
+                            (click)="selectWeek(itemWeek, i)">
+                            {{itemWeek.start}} - {{itemWeek.end}} {{itemWeek.week}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="showCustomCalendar && data === 'Associates'">
+            <div class="offset-md-9  col-md-3 col-lg-3">
+                <div class="form-group calendar-group col-lg-10 col-md-10">
+                    <div>
+                        <label name="role">To</label>
+                    </div>
+                    <input type="text" class="form-control co-lg-8 col-md-8 display-inline" formControlName="endDate"
+                        [owlDateTime]="dt4" (dateTimeChange)="clearEndDate($event)" [min]="minCustomDate" disabled>
+                    <img class=" ml-10 cursor-pointer" src="assets/images/calendar.svg" alt=""
+                        [owlDateTimeTrigger]="dt4">
+                    <owl-date-time [pickerType]="'calendar'" #dt4></owl-date-time>
+                </div>
+            </div>
+        </div>
+
+        <div class="align-generate-btn">
+            <button type="submit" class="create-action">Generate</button>
+        </div>
+    </form>
+</div>

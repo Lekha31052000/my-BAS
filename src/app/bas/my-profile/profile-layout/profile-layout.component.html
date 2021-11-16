@@ -1,0 +1,52 @@
+<div class="my-profile-container">
+    <div class="row no-gutter">
+        <div class="col-sm-3 col-xs-5">
+            <div class="my-profile-container">
+                <div class="profile">
+                    <div class="profile-header">
+                        <h4 class="text-capitalize">{{user.firstname}} {{user.lastname}}</h4>
+                        <p>{{user.role}}</p>
+                    </div>
+                    <div class="profile-body table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>EMAIL</td>
+                                    <td>{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>PHONE</td>
+                                    <td>{{user.mobile}}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td>ACTIVE SINCE</td>
+                                    <td class="active-since">{{user.createddate ? user.createddate : '-'}}</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="menu-section">
+                            <div class="menu">
+                                <img src="assets/images/person.svg" alt="">
+                                <a class="menu-label" routerLink="/profile/my-profile" routerLinkActive
+                                    #myProfile="routerLinkActive"
+                                    [ngClass]="myProfile.isActive ? 'route-active' : '' ">Personal Information</a>
+                            </div>
+                            <div class="menu">
+                                <img src="assets/images/person.svg" alt="">
+                                <a class="menu-label" routerLink="/profile/change-password" routerLinkActive
+                                    #changePassword="routerLinkActive"
+                                    [ngClass]="changePassword.isActive ? 'route-active' : '' ">Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-7">
+            <!-- <bas-change-password></bas-change-password> -->
+            <!-- <bas-profile></bas-profile> -->
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

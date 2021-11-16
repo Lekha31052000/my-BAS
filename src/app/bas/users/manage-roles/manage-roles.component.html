@@ -1,0 +1,78 @@
+<div class="user-container">
+    <div class="display-user">
+        <div class="table-responsive">
+            <table class="table table-scroll">
+                <thead>
+                    <tr>
+                        <!-- <th width="10%" *ngIf="allRoleList.length > 0 &&  permissions.delete" class="text-center">
+                            <mat-checkbox class="example-margin text-center" type="checkbox"
+                                (change)="onCheckboxChange(-1, $event)" name="selectAll" [(ngModel)]="selectAll">
+                            </mat-checkbox>
+                        </th> -->
+                        <th class="text-center" width="5%">Sl. No</th>
+                        <th width="25%">Roles</th>
+                        <th width="55%">Description</th>
+                        <th width="15%" class="text-center" *ngIf="permissions.delete || permissions.update">Action</th>
+                    </tr>
+                </thead>
+                <ng-container>
+                    <tbody class="user-list" *ngIf="allRoleList.length > 0; else noRole;">
+                        <tr *ngFor="let role of allRoleList | paginate: { itemsPerPage : pageData.pageSize, totalItems: pageData.totalItems, currentPage: pageData.pageNumber }; let roleIndex = index;"
+                            [ngClass]="role.deleted ? 'is-archive' : ''">
+                            <!-- <td width="10%" *ngIf="permissions.delete" class="text-center">
+                                <mat-checkbox class="example-margin" type="checkbox"
+                                    (change)="onCheckboxChange(roleIndex)" name="checked{{roleIndex}}"
+                                    [(ngModel)]="role.isDelete">
+                                </mat-checkbox>
+                            </td> -->
+                            <td class="text-center" width="5%">
+                    {{pageData.pageSize * (pageData.pageNumber > 0 ? pageData.pageNumber - 1 : 0) + roleIndex + 1}}
+                </td>
+                            <td width="25%">{{role.role}}</td>
+                            <td width="55%">{{role.description}}</td>
+                            <td width="15%" class="action text-center" *ngIf="permissions.update || permissions.delete">
+                                <!-- <mat-slide-toggle *ngIf="permissions.delete" class="flex-item"
+                                    name="archive{{roleIndex}}" [(ngModel)]="role.deleted"
+                                    (change)="confirmArchive(user)" disableRipple>
+                                </mat-slide-toggle> -->
+                                <img *ngIf="permissions.update && !role.deleted"
+                                    class="icon-edit cursor-pointer flex-item" (click)="navigateToEditPage(role._id)"
+                                    src="assets/images/edit.svg" alt="edit" />
+                                <img *ngIf="permissions.delete && !role.deleted"
+                                    class="icon-edit cursor-pointer flex-item" (click)="confirmDeletion(role)"
+                                    src="assets/images/delete.svg" alt="delete" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </ng-container>
+                <ng-template #noRole>
+                    <tbody class="no-data">
+                        <tr>
+                            <td colspan="4" class="text-center">No Role Available</td>
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+        <div *ngIf="allRoleList.length > 0" class="pagination-section my-pagination">
+            <!-- <div class="display-ib mr-20">
+                <div class="form-group custom-page-size">
+                    <mat-form-field>
+                        <mat-select placeholder="Page Size" #pageSize=ngModel name="pageSize"
+                            [(ngModel)]="pageData.pageSize" (selectionChange)="setCurrentPageNumber(0)">
+                            <mat-option *ngFor="let page of pageData.allPageSizes" [value]="page">
+                                {{page}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="display-ib">
+                <strong>Total No. of Users: {{pageData.totalItems}}</strong>
+            </div> -->
+            <pagination-controls (pageChange)="setCurrentPageNumber($event)" [nextLabel]="pageControl.nextLabel"
+                [previousLabel]="pageControl.previousLabel" [responsive]="pageControl.responsive"
+                [autoHide]="pageControl.autoHide"></pagination-controls>
+        </div>
+    </div>
+</div>

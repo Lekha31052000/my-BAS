@@ -1,0 +1,56 @@
+<div class="login-container row no-gutter">
+    <div class="col-sm-6 left-section">
+        <div class="side-block">
+        </div>
+        <div class="logo-section text-center col-xs-hidden">
+            <h4 class="logo-title">BAS</h4>
+            <img src="assets/images/login-logo.svg" class="img-responsive" alt="BAS" />
+        </div>
+    </div>
+    <div class="col-sm-6 float-right login-wrapper">
+        <div class="login-section">
+            <div>
+                <form class="login-form" [formGroup]="otpForm" (submit)="otpSubmit()" autocomplete="off">
+                    <div class="form-group mb-25">
+                        <label class="form-title" for="signin">Enter Verification Code</label>
+                        <p class="login-info">
+                            Verification code has been sent to Email.<br />
+                            <span class="user-mail">{{userEmail}}</span>
+                        </p>
+                    </div>
+                    <div class="form-group otp-wrapper">
+                        <input #otp1 class="form-control" type="text" formControlName="otp1" placeholder=""
+                            maxlength="1" autocomplete="off" required />
+                        <input class="form-control" type="text" formControlName="otp2" placeholder="" maxlength="1"
+                            autocomplete="off" required />
+                        <input #otp3 class="form-control" type="text" formControlName="otp3" placeholder=""
+                            maxlength="1" autocomplete="off" required />
+                        <input class="form-control" type="text" formControlName="otp4" placeholder="" maxlength="1"
+                            autocomplete="off" required />
+                    </div>
+
+                    <div class="form-actions text-center">
+                        <button type="submit" class="login-submit" name="login" [disabled]="otpForm.invalid">
+                            Submit
+                        </button>
+                    </div>
+
+                    <div class="help-section">
+                        <p>
+                        
+                            <a href="javascript:void(0)" class="sign-up" routerLink="../login">
+                                Sign In
+                            </a>
+                        </p>
+                        <p>
+                            <!-- <a class="sign-up">Didn't get Verification code ?</a> -->
+                            <a href="javascript:void(0)" class="sign-up" (click)="resendOTP()">
+                                    Didn't get Verification code ? Resend
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

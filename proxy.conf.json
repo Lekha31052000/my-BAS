@@ -1,0 +1,7 @@
+{
+    "/FM220": {
+      "target": "http://localhost:4205",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }

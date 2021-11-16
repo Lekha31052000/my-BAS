@@ -1,0 +1,35 @@
+<div class="confirmation-container">
+    <div class="confirmation-header">
+        <p class="float-left">Select Reporting Manager</p>
+    </div>
+    <div class="confirmation-data">
+        <form [formGroup]="searchForm" class="search-form">
+            <div class="form-group search-section">
+                <mat-form-field floatLabel="never">
+                    <img matSuffix class="search-icon" src="assets/images/search-icon.png" />
+                    <input matInput formControlName="searchText" placeholder="Search Reporting Manager"
+                    [matAutocomplete]="autoSearch" />
+                </mat-form-field>
+                <mat-autocomplete #autoSearch="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredManager; let idx=index;" [value]="option.name"
+                        (click)="onSelectingManager(option)">
+                        <span class="text-capitalize">{{option.name}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="text-center manager-list">
+                <ng-container *ngIf="selectedManager">
+                    <span class="manager">
+                        {{selectedManager}}
+                        <img matSuffix src="assets/images/close@2x.png" alt="X" (click)="clearSelection()">
+                    </span>
+                </ng-container>
+            </div>
+        </form>
+
+        <div class="confirm-action">
+            <button type="button" class="confirm text-capitalize" [disabled]="!selectedManager" (click)="updateUser()">Save</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

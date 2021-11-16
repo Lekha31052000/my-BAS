@@ -1,0 +1,177 @@
+<div class="row no-gutter">
+  <!-- <div class="col-sm-12"> -->
+  <div class="col-sm-7 col-md-5 layout-header">
+    <!-- <img matPrefix class="back-icon float-left" src="assets/images/back.svg"> -->
+    <nav mat-tab-nav-bar class="tab-header" disableRipple>
+      <a
+        mat-tab-link
+        (click)="onTabClick('Users')"
+        routerLink="/manage-users/users"
+        *ngIf="showResources.users"
+        routerLinkActive
+        #users="routerLinkActive"
+        [ngClass]="users.isActive ? 'tab-active' : ''"
+        ><span class="tab-label">Users</span></a
+      >
+      <a
+        mat-tab-link
+        (click)="onTabClick('Roles')"
+        routerLink="/manage-users/roles"
+        *ngIf="showResources.roles && role === 'superadmin'"
+        routerLinkActive
+        #roles="routerLinkActive"
+        [ngClass]="roles.isActive ? 'tab-active' : ''"
+        ><span class="tab-label">Roles</span></a
+      >
+    </nav>
+  </div>
+  <div
+    style="margin-left: -15%; margin-top: 2%; z-index: 1"
+    *ngIf="role === 'superadmin' && selectedTabLabel === 'Users' && flag"
+  >
+    <select (change)="vendorSelect($event.target.value)">
+      <option value="all" selected>Select Vendor</option>
+      <option *ngFor="let i of vendorCollections">{{ i }}</option>
+    </select>
+  </div>
+  <div class="col-sm-5 col-md-7 form-action layout-action text-right">
+    <!-- uncomment once the search api is working -->
+    <div class="custom-search">
+      <form [formGroup]="searchForm" *ngIf="allBtns.search">
+        <div class="form-group">
+          <img
+            matSuffix
+            class="search-icon"
+            src="assets/images/search-icon.png"
+          />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="searchText"
+            [placeholder]="
+              selectedTabLabel == 'Users' ? 'Search User' : 'Search Role'
+            "
+            minlength="2"
+            maxlength="60"
+            autocomplete="off"
+            (keyup)="onSearch($event)"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- <ng-container> -->
+    <!-- for small devices -->
+    <a
+      class="material-icons action-icons text-muted hidden-sm-up"
+      [matMenuTriggerFor]="menu"
+      >more_vert</a
+    >
+    <mat-menu x-position="before" #menu="matMenu">
+      <ng-container *ngIf="showResources.users && selectedTabLabel == 'Users'">
+        <!-- <a *ngIf="allBtns.addUser" class="dropdown-item" (click)="navigatePage('addUser')"
+                    routerLink="/manage-users/users/create-user">Add User</a> -->
+        <!-- <file-upload #bulkUpload accept=".csv" (file)="onfileUploadChange($event)">
+                </file-upload>
+                <a *ngIf="allBtns.addUser" name="downloadUser" class="dropdown-item"
+                    (click)="downloadCSV('User Details' , 'csv', false)">
+                    Bulk Upload
+                </a> -->
+      </ng-container>
+      <ng-container *ngIf="showResources.roles && selectedTabLabel == 'Roles'">
+        <a
+          *ngIf="allBtns.addRole"
+          name="createUser"
+          class="dropdown-item"
+          (click)="navigatePage('addRole')"
+          routerLink="/manage-users/roles/create-role"
+        >
+          Add Role
+        </a>
+      </ng-container>
+      <!-- <div class="form-actions">
+                <button type="button" class="cancel-class" name="cancelClass" (click)="onCancel()">Cancel</button>
+                <button type="submit" class="submit-class" name="submitClass"
+                    [disabled]="userForm.invalid || userForm.pristine">Save</button>
+            </div> -->
+    </mat-menu>
+    <!-- </ng-container> -->
+    <!-- for other devices -->
+    <span class="hidden-md-down">
+      <ng-container *ngIf="showResources.users && selectedTabLabel == 'Users'">
+        <button
+          *ngIf="allBtns.addUser"
+          type="button"
+          name="createUser"
+          class="create-action"
+          (click)="navigatePage('addUser')"
+          routerLink="/manage-users/users/create-user"
+        >
+          Add User
+        </button>
+        <button
+          *ngIf="allBtns.addUser"
+          type="submit"
+          name="createUser"
+          class="create-action"
+          (click)="filterPopUp()"
+        >
+          Report
+        </button>
+        <!-- <file-upload #bulkUpload accept=".csv" (file)="onfileUploadChange($event)">
+                </file-upload>
+                <button *ngIf="allBtns.bulkUserUpload" type="button" name="downloadUser" class="download-action"
+                    (click)="downloadCSV('User Details' , 'csv', false)">
+                    Bulk Upload
+                </button> -->
+        <!-- <div class="form-actions"> -->
+        <!-- <button
+          *ngIf="add"
+          type="button"
+          class="cancel-class"
+          name="cancelClass"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button> -->
+        <button
+          *ngIf="allBtns.add && !allBtns.addUser"
+          type="button"
+          name="createUser"
+          class="cancel-class"
+          routerLink="/manage-users/users"
+        >
+          Cancel
+        </button>
+        <button
+          *ngIf="allBtns.add && !allBtns.addUser"
+          type="button"
+          name="createUser"
+          class="submit-class"
+          routerLink="/manage-users/users"
+        >
+          Save
+        </button>
+        <!-- </div> -->
+      </ng-container>
+      <ng-container *ngIf="showResources.roles && selectedTabLabel == 'Roles'">
+        <button
+          *ngIf="allBtns.addRole"
+          type="button"
+          name="createUser"
+          class="create-action"
+          (click)="navigatePage('addRole')"
+          routerLink="/manage-users/roles/create-role"
+        >
+          Add Role
+        </button>
+      </ng-container>
+    </span>
+  </div>
+  <!-- </div> -->
+  <div class="col-sm-12">
+    <div class="tab-body">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

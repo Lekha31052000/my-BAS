@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168" height="168" viewBox="0 0 168 168">
+  <defs>
+    <linearGradient id="linear-gradient" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f7803c"/>
+      <stop offset="1" stop-color="#fdb71a"/>
+    </linearGradient>
+    <filter id="Rectangle_1583" x="0" y="0" width="168" height="168" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_881" data-name="Group 881" transform="translate(-6336 -5262)">
+    <g transform="matrix(1, 0, 0, 1, 6336, 5262)" filter="url(#Rectangle_1583)">
+      <rect id="Rectangle_1583-2" data-name="Rectangle 1583" width="150" height="150" rx="10" transform="translate(9 6)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="done-tick" transform="translate(6382 5276.208)">
+      <path id="Path_6047" data-name="Path 6047" d="M72.5,37.988,70.48,36.255a8.129,8.129,0,0,0-11.335.721L25.4,74.39,15.218,65.618a8.129,8.129,0,0,0-11.336.708L2.1,68.3a8.128,8.128,0,0,0,.585,11.486l18.67,17.1a8.13,8.13,0,0,0,11.728-.623l40.279-46.8A8.13,8.13,0,0,0,72.5,37.988Z" transform="translate(0)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

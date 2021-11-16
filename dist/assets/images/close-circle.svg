@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24.713" height="24.713" viewBox="0 0 24.713 24.713">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;stroke:#707070}.cls-2{fill:#535353}.cls-3{stroke:none}.cls-4{fill:none}
+        </style>
+    </defs>
+    <g id="Group_3259" data-name="Group 3259" transform="translate(-324.847 -12)">
+        <g id="Ellipse_1164" class="cls-1" data-name="Ellipse 1164" transform="translate(326 14)">
+            <circle cx="11" cy="11" r="11" class="cls-3"/>
+            <circle cx="11" cy="11" r="10.5" class="cls-4"/>
+        </g>
+        <path id="ic_cancel_24px" d="M14.357 2a12.357 12.357 0 1 0 12.356 12.357A12.345 12.345 0 0 0 14.357 2zm6.178 16.793l-1.742 1.742-4.436-4.435-4.436 4.435-1.743-1.742 4.436-4.436-4.436-4.436 1.743-1.743 4.436 4.436 4.436-4.436 1.742 1.742-4.435 4.437z" class="cls-2" transform="translate(322.847 10)"/>
+    </g>
+</svg>

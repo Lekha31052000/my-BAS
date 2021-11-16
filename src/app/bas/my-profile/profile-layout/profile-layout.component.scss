@@ -1,0 +1,168 @@
+@import 'src/assets/styles/global.scss';
+
+.layout-header {
+    .back-icon {
+        margin-top: 12px;
+        margin-left: 10px;
+    }
+}
+
+.tab-header {
+    border-bottom: none;
+    // background-color: #edeced;
+    height: 70px;
+
+    // margin-left: -2px;
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: $primary-clr-alpha;
+        }
+    }
+
+    .tab-active {
+        // background-color: $primary-clr-alpha;
+        color: $primary-clr-alpha !important;
+        width: 0px !important;
+    }
+
+    .mat-tab-link {
+        min-width: 130px;
+        margin-top: 10px;
+        padding: 0;
+        font-size: 18px;
+        font-weight: $ft-bold;
+    }
+}
+
+.tab-body {
+    top: 20px;
+    // 109px = 80px (header) + 40px (footer) + 70px (tab header)
+    // max-height: calc(100vh - 190px);
+    // overflow: auto;
+}
+
+.form-action {
+    padding-top: 20px;
+    padding-right: 20px;
+
+    .create-action {
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($primary-clr-alpha, $white, 0px, 0px, 150px, 40px, 18px, 300, 20px);
+        // @mixin no-transition($bg-color, $color)
+        @include no-transition($primary-clr-alpha, $white);
+
+        img {
+            margin-left: 7px;
+            width: 12px;
+        }
+    }
+
+    .download-action {
+        // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+        @include create-buttons($primary-clr-alpha, $white, 0px, 0px, 150px, 40px, 18px, 300, 20px);
+        @include no-transition($primary-clr-alpha, $white);
+        margin-left: 5px;
+    }
+}
+
+.my-profile-container {
+    height: calc(100vh - 80vh);
+    margin: 0px 0px 0px 15px;
+    padding: 20px 0px;
+
+    .profile {
+        height: calc(100vh - 150px);
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: -5px 5px 12px 0 rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+
+        .profile-header {
+            display: block;
+            text-align: center;
+            padding-top: 15%;
+            padding-bottom: 15%;
+
+            h4 {
+                color: #2e384d;
+                font-weight: 500;
+                margin-bottom: 0px;
+            }
+
+            p {
+                color: #8798ad;
+            }
+        }
+
+        .table-responsive {
+            box-shadow: none;
+            padding: 0 20px;
+            max-height: 33vh;
+
+        }
+
+        .profile-body {
+            .table {
+                margin-bottom: 0px;
+            }
+
+            table {
+                box-shadow: 0px 2px 0px 0 rgba(0, 0, 0, 0.1);
+                background-color: #ffffff;
+            }
+
+            table tbody tr td {
+                border: none !important;
+                padding: 0.35rem 0.85rem;
+                font-size: 14px;
+            }
+
+            table tbody tr td:first-child {
+                color: #b0bac9;
+                width: 45%;
+                padding-left: 0px;
+            }
+
+            table tbody tr td:last-child {
+                color: #2e384d;
+                width: 55%;
+                padding-right: 0px;
+            }
+
+            table tbody tr:last-child {
+                td {
+                    padding-bottom: 20px;
+                }
+            }
+
+            .active-since {
+                color: #7ba93f !important;
+            }
+        }
+
+        .menu-section {
+            margin-top: 20px;
+            img {
+                filter: grayscale(100%) opacity(0.5);
+                margin-left: -5px;
+                margin-right: 10px;
+            }
+
+            a {
+                text-decoration: none;
+                color: #808080;
+                vertical-align: sub;
+            }
+
+            .menu {
+                box-shadow: 0px 1px 0px 0 rgba(0, 0, 0, 0.1);
+                padding: 6px 15px 6px 0;
+                display: table;
+            }
+        }
+    }
+}
+
+// @media (max-width:1024px) and (min-width:768px) {}

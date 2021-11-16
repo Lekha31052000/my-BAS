@@ -1,0 +1,52 @@
+@import 'src/assets/styles/global.scss';
+
+.confirmation-container{
+    .confirmation-header{
+        height: 60px;
+        padding: 18px 29px;
+        background-color: $primary-clr-dark;
+        p{
+            font-size: 18px;   
+            color: white;
+        }
+        img{
+            width: 14px;
+            height: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    }
+    .confirmation-data{
+        padding: 18px 29px;
+        .confirm-action{
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .confirm{   
+            // float: right;       
+            // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+            @include create-buttons($primary-clr-alpha,$white,6px,12px,115px,42px,18px,300,20px);
+        }
+        .cancel{
+            // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+            @include create-buttons($white,$primary-clr-alpha,6px,12px,115px,42px,18px,300,20px);
+            border: 1px solid $primary-clr-alpha;
+            margin-left: 25px;
+            // float: right;
+            // &:hover,
+            // &:focus,
+            // &:active {
+            //     background: $white;
+            //     color: $black;
+            //     transition-duration: .5s;
+            //     transition-timing-function: ease-in-out;
+            // }
+        }
+        p{
+            font-size: 18px;   
+            color: $black;
+            // margin-top: 20px;
+        }
+    }
+}

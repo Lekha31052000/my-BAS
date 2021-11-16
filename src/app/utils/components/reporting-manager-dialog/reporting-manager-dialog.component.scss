@@ -1,0 +1,75 @@
+@import 'src/assets/styles/global.scss';
+
+.confirmation-container {
+    .confirmation-header {
+        height: 60px;
+        padding: 18px 29px;
+
+        p {
+            font-size: 18px;
+            color: #808080;
+        }
+
+        img {
+            width: 14px;
+            height: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .confirmation-data {
+        padding: 18px 29px;
+
+        form {
+            padding: 10px 25px;
+
+            .manager-list {
+                min-height: 60px;
+                padding: 10px 5px;
+
+                .manager {
+                    padding: 7px 15px;
+                    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+                    border-radius: 20px;
+                    background-color: #ffffff;
+                    color: #707070;
+                    font-size: 15px;
+                    text-transform: capitalize;
+
+                    img {
+                        width: 12px;
+                        margin-left: 20px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+        }
+
+        .confirm-action {
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .search-section {
+            mat-form-field {
+                width: 100%;
+            }
+            mat-option.mat-option{
+                max-height: 30px !important;
+            }
+
+            img {
+                width: 18px;
+            }
+        }
+
+        .confirm {
+            // float: right;       
+            // @mixin create-buttons($bgClr,$clr,$ptb,$plr,$width,$height,$ft-size,$ft-weight,$rad)
+            @include create-buttons($primary-clr-alpha, $white, 6px, 12px, 110px, 38px, 18px, 300, 20px);
+        }
+    }
+}

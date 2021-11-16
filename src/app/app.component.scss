@@ -1,0 +1,20 @@
+@import 'src/assets/styles/global.scss';
+
+.no-internet-section{
+    width: 100%;
+    height: 100vh;
+    display: block;
+    .message{
+        text-align: center;
+        margin-top: 35vh;
+        .title{
+            // @mixin set-font-config($fontSize, $fontWeight, $fontColor, $textAlign)
+            @include set-font-config(38px, normal, #231f20, center, 'Amazon Ember');
+            margin-top: 40px;
+        }
+        .sub-title{
+            // @mixin set-font-config($fontSize, $fontWeight, $fontColor, $textAlign)
+            @include set-font-config(20px, normal, $grey, center, 'Amazon Ember Display Light');
+        }
+    }
+}

@@ -1,0 +1,32 @@
+<div class="sidenav-container" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+    <div>
+        <div class="sidebar-header">
+            <div class="col-sm-12" >
+                    <img class="menu-icon" src="assets/images/menu.svg" alt="" (click)="toggleMenu();">
+                    <div class="menu-text" [@animateText]="linkText ? 'show' : 'hide'" (click)="toggleMenu();">Menu</div>
+                <!-- <app-breadcrumb></app-breadcrumb>s -->
+            </div>
+            <!-- <span>
+                <img class="side-logo" *ngIf="imgToggle === false" src="../../../../assets/img/fm-logo.png" alt="">
+                <img class="side-logo-expand" [@animateText]="linkText ? 'show' : 'hide'"
+                    src="../../../../assets/img/fm-logo.png" alt="">
+            </span> -->
+        </div>
+        <div [ngClass]="imgToggle? '' : 'mt-30'">
+            <mat-nav-list disableRipple>
+                <div class="side-menu" *ngFor="let module of modules">
+                    <div>
+                        <a mat-list-item routerLink="{{module.routerLink}}" class="module-text" [ngClass]="{'active' : checkActiveRoute(module.identifier)}">
+                            <div class="side-logo {{module.menuIcon}}">
+                                    <img src="assets/images/{{module.menuIcon}}.svg" alt="">
+                                <span class="side-menu-text"
+                                    [@animateText]="linkText ? 'show' : 'hide'">{{ module.module_name }}
+                                </span>
+                            </div>                         
+                        </a>
+                    </div>
+                </div>
+            </mat-nav-list>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<!-- if the user is online -->
+<ng-container *ngIf="isConnected else noConnection">
+    <!-- show the loader if the 'loading' is true' -->
+    <div class="loading" *ngIf="loading">Loading&#8230;</div>
+    <router-outlet></router-outlet>
+</ng-container>
+<!-- if the user is offline -->
+<ng-template #noConnection>
+    <div class="no-internet-section">
+        <div class="message row no-gutter">
+            <div class="col-sm-12 text-center">
+                <!-- <img class="no-internet-logo" src="assets/images/no-internet.png" /><br> -->
+                <h2 class="title">No Internet Connection</h2>
+                <h3 class="sub-title">Your connection appears to be off-line.</h3>
+            </div>
+        </div>
+    </div>
+</ng-template>

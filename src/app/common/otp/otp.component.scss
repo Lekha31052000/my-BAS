@@ -1,0 +1,31 @@
+@import 'src/assets/styles/global.scss';
+// some styles are taken/referred from 'login.component.scss
+// styleUrls: ['./sign-up.component.scss', '../login/login.component.scss']
+
+.otp-wrapper {
+    display: inline-flex;
+
+    .form-control {
+        border: none;
+        border-bottom: 1px solid #ced4da;
+        border-radius: 0px;
+        margin-right: 20px;
+        caret-color: $primary-clr-alpha;
+        font-size: 24px;
+        background-color: #fafafa;
+        padding: 0;
+        text-align: center;
+        width: 20%;
+
+        &:focus,
+        &:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+.user-mail {
+    color: $primary-clr-alpha;
+    text-decoration: none;
+}
